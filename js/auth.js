@@ -23,6 +23,8 @@ function append() {
     
     if (uname == "" || pass0 == "" || document.getElementById("lname").value=="" || document.getElementById("fname").value=="") {
         window.alert("すべての項目を埋めてください。");
+    } else if (isZen(uname)) {
+        window.alert("Usernameに全角文字を使用することはできません。");
     } else {
         if (pass0 == pass1) {
             document.getElementById("passwd0").value="rgt4hyjuk8j7uj65h4tyju54hg3htjyruk6r5j;6hetyrku5j46hertejysku5e7j64";
@@ -33,6 +35,17 @@ function append() {
             exit(0);
         } else {
             window.alert("入力された２つのパスワードが一致していません。");
+        }
+    }
+    return false;
+}
+
+function isZen(str){
+    for(var i=0; i<str.length; i++){
+        /* 1文字ずつ文字コードをエスケープし、その長さが4文字以上なら全角 */
+        var len=escape(str.charAt(i)).length;
+        if(len>=4){
+            return true;
         }
     }
     return false;
