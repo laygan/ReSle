@@ -30,7 +30,7 @@ function append() {
             document.getElementById("passwd0").value="rgt4hyjuk8j7uj65h4tyju54hg3htjyruk6r5j;6hetyrku5j46hertejysku5e7j64";
             document.getElementById("passwd1").value="k9l8o7ki6j5h4thyukilo;7p:-0p9oi7w46u3a5ehtjyrkutil6r76857jryku6il8r";
             var path = convert(uname, pass1);
-            make_hidden('pass', path, 'signup');
+            make_hidden('pass', path, 'add');
             return true;
             exit(0);
         } else {
