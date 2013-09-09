@@ -44,7 +44,7 @@
                             <div class="tab-pane fade" id="create">
                                 <form method="post" action="./core/ctrl.php" onSubmit="return append();">
                                     <input type="hidden" name="runFlag" value="add-user" />
-                                    <input type="hidden" name="return-uri" value="<?php echo "http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'] ?>" />
+                                    <input type="hidden" name="return-url" value="<?php echo $_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'] ?>" />
                                     <p>シフト予約システムへサインアップしましょう。</p>
                                     <div class="form-group">
                                         <label for="uname">Username</label>
