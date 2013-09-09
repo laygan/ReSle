@@ -1,0 +1,74 @@
+<?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (! isset($_POST["mode"]) ) {
+            echo "エラー：POST値NULL";
+            exit(1);
+        } else {
+            $mode = $_POST["mode"];
+            
+            if ($mode==="userdel") {
+                $modestr = "ユーザ削除";
+                $md = 1;
+            } else if ($mode==="init") {
+                $modestr = "システム初期化";
+                $md = 2;
+            } else {
+                echo "エラー：不正なPOST値";
+            }
+        }
+    } else {
+        echo "エラー：不正なページ遷移";
+        exit(1);
+    }
+?>
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./../css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="./../js/bootstrap.min.js"></script>
+        <title>シフト予約システム｜管理設定</title>
+    </head>
+    <body>
+        <div class="row">
+            <!-- 左余白 -->
+            <div class="col-md-2"></div>
+            <!-- メインコンテンツ -->
+            <div class="col-md-8">
+                <h1><?php print $modestr; ?></h1>
+                <p><?php print $modestr; ?>を行います</p>
+<?php
+    if ($md === 1) {
+?>
+                <p><?php print $modestr; ?>を行うユーザ名を指定してください。</p>
+                <form method="post" action="./../core/ctrl.php">
+                    <div class="form-group">
+                        <input type="hidden" name="runFlag" value="rm-user" />
+                        <label for="del-uname">Username</label>
+                        <input type="text" class="form-control" name="del-uname" placeholder="ユーザ名" />
+                        <span class="help-block">削除するユーザのユーザ名を入力してください。</span>
+                    </div>
+<?php
+    } else if ($md === 2) {
+?>
+                <p class="lead">この操作をした場合、ユーザ情報，データベース構成情報，データベース内容の初期化が行われます。</p>
+                <form method="post" action="./../core/ctrl.php">
+                    <input type="hidden" name="runFlag" value="sys-init" />
+<?php
+    } else {
+        echo "エラー：内部エラー（md変数値異常）";
+        exit(1);
+    }
+?>
+                    <p class="danger">
+                        この操作を取り消すことはできません。本当によろしいですか？<br />
+                        （※ボタンを押すと、すぐに操作が実行されます）
+                    </p>
+                    <button type="submit" class="btn btn-danger">実　行</button>
+                </form>
+            </div>
+            <!-- 右余白 -->
+            <div class="col-md-2"></div>
+        </div>
+    </body>
+</html>

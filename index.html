@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="./js/jquery.min.js"></script>
+        <script type="text/javascript" src="./js/footerFixed.js"></script>
+        <script type="text/javascript" src="./js/auth.js"></script>
+        <script type="text/javascript" src="./js/base64.js"></script>
+        <script type="text/javascript" src="./js/des.js"></script>
+        <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+        <title>シフト予約システム｜ログイン</title>
+    </head>
+    <body>
+        <div class="" id="loginModal">
+            <div class="modal-header">
+                <h3>アカウントをお持ちですか?</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="modal-body">
+                    <div class="well">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#login" data-toggle="tab">ログイン</a></li>
+                            <li><a href="#create" data-toggle="tab">アカウント作成</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane active in" id="login">
+                                <form class="form-horizontal" action='' method="post" onSubmit="return auth();">
+                                    <p>シフト予約システムへサインイン</p>
+                                    <div class="form-group">
+                                        <label for="uname">Username</label>
+                                        <input type="text" class="form-control" name="uname" placeholder="ユーザ名" id="in-uname"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwd">Password</label>
+                                        <input type="password" class="form-control" name="passwd" placeholder="パスワード" id="passwd" />
+                                    </div>
+                                    <button class="btn btn-success">Login</button>
+                                </form>                
+                            </div>
+                            <div class="tab-pane fade" id="create">
+                                <form method="post" action="./core/ctrl.php" onSubmit="return append();">
+                                    <input type="hidden" name="runFlag" value="add-user" />
+                                    <input type="hidden" name="return-url" value="<?php echo $_SERVER['SCRIPT_NAME'] ?>" />
+                                    <p>シフト予約システムへサインアップしましょう。</p>
+                                    <div class="form-group">
+                                        <label for="uname">Username</label>
+                                        <input type="text" class="form-control" id="up-uname" name="uname" placeholder="ログイン時に使用するユーザ名" />
+                                        <span class="help-block">ログイン時に個人を識別するために使用します。半角英数字10文字以内で入力してください。</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lname">姓</label>
+                                        <input type="text" class="form-control" name="lname" placeholder="あなたの苗字" />
+                                        <span class="help-block">表示されるあなたの氏名のうちの、苗字を入力してください。</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">名</label>
+                                        <input type="text" class="form-control" name="fname" placeholder="あなたの名前" />
+                                        <span class="help-block">表示されるあなたの氏名のうちの、名前を入力してください。</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwd0">Create Password for Login</label>
+                                        <input type="password" class="form-control" id="passwd0" placeholder="ログイン時に使用するパスワード" />
+                                        <span class="help-block">ログイン時に認証するため使用します。半角英数６文字以上10文字以内で入力してください。</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="passwd1">Verify a Password</label>
+                                        <input type="password" class="form-control" id="passwd1" placeholder="同じパスワードをもう一度" />
+                                        <span class="help-block">上記で設定したパスワードをもう一度入力してください。</span>
+                                    </div>
+                                    <button class="btn btn-primary">Create Account</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div id="footer">
+            <p>
+                Created by Tatsuya Kujimichi　- シフト予約システム Version 0.1 -<br />
+                Javascriptを「オン」の状態でご利用ください。<br />
+                CSS3を使用しています。最新のブラウザを使用してください。<br />
+                InternetExplorer<u><b>以外</b></u>で動作します。推奨ブラウザはMozilla Firefoxです。開発・検証にはGoogle Chromeが使用されました。
+            </p>
+        </div>
+    </body>
+</html>

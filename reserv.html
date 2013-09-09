@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./css/reserv.css" type="text/css" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="./js/jquery.min.js"></script>
+        <script type="text/javascript" src="./js/footerFixed.js"></script>
+        <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+        <script type="text/javascript" defer src="./js/reserv.js"></script>
+        <title>シフト予約</title>
+    </head>
+    <body>
+        <h1>シフト予約</h1>
+        <blockquote>
+            <!-- Button trigger modal -->
+            <a data-toggle="modal" href="#myModal" class="btn btn-info">このシステムの使い方を表示</a>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">「シフト予約 on Cloud」の使い方</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>表の中の色について</p>
+                            <div style="width: 50px; height:26px; margin: 0px; border: 1px #000 solid; background: #fff;">　白</div>　・・・未指定：シフトとして、予約指定できます。
+                            <div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;">　緑</div>　・・・指定　：シフトとして、シフト予約されています。
+                            <div style="width: 50px; height:26px; margin: 0px; border: none; background: #f02;">　赤</div>　・・・休業　：この時間帯は休業のため、シフト予約指定できません。
+                            </ul>
+                            <hr />
+                            <p>主な手順</p>
+                            <ol>
+                                <li>シフトとして入っても良い時間帯の開始時刻にあたるブロックをタップ or クリックで選択します。</li>
+                                <li>選択された時間から、入れる時間帯の終了時刻にあたるブロックをタップ or クリックで選択します。</li>
+                                <li>開始と終了までの間が緑色になれば、選択完了です。</li>
+                                <li>すべて設定したら、「シフト予約送信」ボタンを押します。</li>
+                            </ol>
+                            <hr />
+                            <p>補足事項</p>
+                            <ul>
+                                <li>時間帯を設定解除するには、設定同じ手順をすると設定が解除されます。</li>
+                                <li>毎週同じ時間帯に入れる場合、「毎週」ボタンをOnにした状態である週のシフトを設定すると、自動的に毎週同じ時間帯が設定されます。</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <small>簡単にこのシステムの使い方を紹介します。</small>
+        </blockquote>
+        <blockquote>
+            <button type="button" class="btn btn-warning btn-lg" data-toggle="button">毎　週</button>
+            <small>毎週同じ時間帯に設定する場合はこちらのボタンを押してください。それぞれの週に個別で指定したいときはもう一度押してください。</small>
+        </blockquote>
+        <div class="calendar">
+            <table id="shift">
+                <thead>
+                    <tr>
+                        <th>　</th><th>8:30</th><th>9:00</th><th>9:30</th><th>10:00</th><th>10:30</th><th>11:00</th><th>11:30</th><th>12:00</th><th>12:30</th><th>13:00</th><th>13:30</th><th>14:00</th><th>14:30</th><th>15:00</th><th>15:30</th><th>16:00</th><th>16:30</th><th>17:00</th><th>17:30</th><th>18:00</th><th>18:30</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>９月１日</th>
+                        <td><div style="width: 50px; height:26px; margin: 0px; border: none; background: #f02;" id="element_10"></div></td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <th>９月２日</th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="text-align: center">
+        <button type="button" id="btn-state" data-loading-text="処理中..." class="btn btn-primary btn-lg">
+            シフト予約を送信
+        </button>
+    </div>
+    <!--
+    <div id="Div">
+        <p id="Mbox0">セルをクリックしたらここに書き出します。</p>
+        <p id="Mbox1">インデックス値は '0'から始まります。</p>
+    </div>
+    -->
+        <div id="footer" style="text-align: right">
+            <p>Javascriptを「オン」の状態でご利用ください。<br />
+            CSS3を使用しています。最新のブラウザを使用してください。<br />
+            InternetExplorer<u><b>以外</b></u>で動作します。推奨ブラウザはMozilla Firefoxです。開発・検証にはGoogle Chromeが使用されました。</p>
+        </div>
+    </body>
+</html>

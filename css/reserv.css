@@ -1,0 +1,28 @@
+.calendar{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select:none;
+    -webkit-user-drag:none;
+    -khtml-user-drag:none;
+}
+
+.calendar table{
+    border: none;
+    border-collapse: collapse;
+}
+
+.calendar td{
+    border: 1px #555555 solid;
+    padding: 0px 0px;
+}
+
+.calendar th{
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+#footer{
+    font-size: 10px;
+    text-align: right;
+}
