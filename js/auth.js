@@ -21,8 +21,8 @@ function append() {
     var pass0 = document.getElementById("passwd0").value;
     var pass1 = document.getElementById("passwd1").value;
     
-    if (uname == "" || pass0 == "") {
-        window.alert("ユーザ名またはパスワードが入力されていません。");
+    if (uname == "" || pass0 == "" || document.getElementById("lname").value=="" || document.getElementById("fname").value=="") {
+        window.alert("すべての項目を埋めてください。");
     } else {
         if (pass0 == pass1) {
             document.getElementById("passwd0").value="rgt4hyjuk8j7uj65h4tyju54hg3htjyruk6r5j;6hetyrku5j46hertejysku5e7j64";
