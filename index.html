@@ -44,7 +44,7 @@
                             <div class="tab-pane fade" id="create">
                                 <form method="post" action="./core/ctrl.php" onSubmit="return append();">
                                     <input type="hidden" name="runFlag" value="add-user" />
-                                    <input type="hidden" name="return-url" value="<?php echo $_SERVER['SCRIPT_NAME'] ?>" />
+                                    <input type="hidden" name="return-uri" value="<?php echo "http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'] ?>" />
                                     <p>シフト予約システムへサインアップしましょう。</p>
                                     <div class="form-group">
                                         <label for="uname">Username</label>
@@ -80,7 +80,7 @@
             </div>
             <div class="col-md-3"></div>
         </div>
-        <div id="footer">
+        <div id="footer" style="text-align: center">
             <p>
                 Created by Tatsuya Kujimichi　- シフト予約システム Version 0.1 -<br />
                 Javascriptを「オン」の状態でご利用ください。<br />
