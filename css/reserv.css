@@ -1,3 +1,5 @@
+body { padding-top: 70px; }
+
 .calendar{
     user-select: none;
     -webkit-user-select: none;

@@ -25,57 +25,65 @@
         $sql = 'SELECT lname, fname FROM user WHERE id='. $_SESSION["authed-id"] .';';
         $result = $db->query("$sql");
 ?>
-        <div style="text-align: right">
-            <form method="post" action="./core/ctrl.php">
-                <input type="hidden" name="runFlag" value="logout" />
-                <button type="submit" class="btn btn-default">ログアウト</button>
-            </form>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <a class="navbar-brand" href="#">学習支援センター ヘルプデスクスタッフ シフト予約</a>
+                <form method="post" action="./core/ctrl.php">
+                    <input type="hidden" name="runFlag" value="logout" />
+                    <button type="submit" class="btn btn-default navbar-btn pull-right">ログアウト</button>
+                </form>
+                <p class="navbar-text pull-right"><?php echo $result["lname"]; ?> <?php echo $result["fname"]; ?> さんでログインされています</p>  
+        </nav>
+        <p class="lead">　Functions</p>
+        <div class="row">
+            <div class="col-md-6">
+                <blockquote>
+                    <button type="button" class="btn btn-warning btn-lg" data-toggle="button">毎　週</button>
+                    <small>毎週同じ時間帯に設定する場合はこちらのボタンを押してください。それぞれの週に個別で指定したいときはもう一度押してください。</small>
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote>
+                    <!-- Button trigger modal -->
+                    <a data-toggle="modal" href="#myModal" class="btn btn-info">このシステムの使い方を表示</a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">「シフト予約 on Cloud」の使い方</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>表の中の色について</p>
+                                    <div style="width: 50px; height:26px; margin: 0px; border: 1px #000 solid; background: #fff;">　白</div>　・・・未指定：シフトとして、予約指定できます。
+                                    <div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;">　緑</div>　・・・指定　：シフトとして、シフト予約されています。
+                                    <div style="width: 50px; height:26px; margin: 0px; border: none; background: #f02;">　赤</div>　・・・休業　：この時間帯は休業のため、シフト予約指定できません。
+                                    </ul>
+                                    <hr />
+                                    <p>主な手順</p>
+                                    <ol>
+                                        <li>シフトとして入っても良い時間帯の開始時刻にあたるブロックをタップ or クリックで選択します。</li>
+                                        <li>選択された時間から、入れる時間帯の終了時刻にあたるブロックをタップ or クリックで選択します。</li>
+                                        <li>開始と終了までの間が緑色になれば、選択完了です。</li>
+                                        <li>すべて設定したら、「シフト予約送信」ボタンを押します。</li>
+                                    </ol>
+                                    <hr />
+                                    <p>補足事項</p>
+                                    <ul>
+                                        <li>時間帯を設定解除するには、設定同じ手順をすると設定が解除されます。</li>
+                                        <li>毎週同じ時間帯に入れる場合、「毎週」ボタンをOnにした状態である週のシフトを設定すると、自動的に毎週同じ時間帯が設定されます。</li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                    <small>簡単にこのシステムの使い方を紹介します。</small>
+                </blockquote>
+            </div>
         </div>
-        <h1>シフト予約　<?php echo $result["lname"]; ?> <?php echo $result["fname"]; ?>さん</h1>
-        <blockquote>
-            <!-- Button trigger modal -->
-            <a data-toggle="modal" href="#myModal" class="btn btn-info">このシステムの使い方を表示</a>
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">「シフト予約 on Cloud」の使い方</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>表の中の色について</p>
-                            <div style="width: 50px; height:26px; margin: 0px; border: 1px #000 solid; background: #fff;">　白</div>　・・・未指定：シフトとして、予約指定できます。
-                            <div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;">　緑</div>　・・・指定　：シフトとして、シフト予約されています。
-                            <div style="width: 50px; height:26px; margin: 0px; border: none; background: #f02;">　赤</div>　・・・休業　：この時間帯は休業のため、シフト予約指定できません。
-                            </ul>
-                            <hr />
-                            <p>主な手順</p>
-                            <ol>
-                                <li>シフトとして入っても良い時間帯の開始時刻にあたるブロックをタップ or クリックで選択します。</li>
-                                <li>選択された時間から、入れる時間帯の終了時刻にあたるブロックをタップ or クリックで選択します。</li>
-                                <li>開始と終了までの間が緑色になれば、選択完了です。</li>
-                                <li>すべて設定したら、「シフト予約送信」ボタンを押します。</li>
-                            </ol>
-                            <hr />
-                            <p>補足事項</p>
-                            <ul>
-                                <li>時間帯を設定解除するには、設定同じ手順をすると設定が解除されます。</li>
-                                <li>毎週同じ時間帯に入れる場合、「毎週」ボタンをOnにした状態である週のシフトを設定すると、自動的に毎週同じ時間帯が設定されます。</li>
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-            <small>簡単にこのシステムの使い方を紹介します。</small>
-        </blockquote>
-        <blockquote>
-            <button type="button" class="btn btn-warning btn-lg" data-toggle="button">毎　週</button>
-            <small>毎週同じ時間帯に設定する場合はこちらのボタンを押してください。それぞれの週に個別で指定したいときはもう一度押してください。</small>
-        </blockquote>
         <div class="calendar">
             <table id="shift">
                 <thead>
