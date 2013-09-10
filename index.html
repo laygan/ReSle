@@ -94,7 +94,7 @@
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane active in" id="login">
-                                <form class="form-horizontal" action="./core/ctrl.php" method="post" onSubmit="return auth();">
+                                <form class="form-horizontal" name="signin" id="signin" action="./core/ctrl.php" method="post" onSubmit="return auth();">
                                     <input type="hidden" name="runFlag" value="login" />
                                     <input type="hidden" name="return-url" value="<?php echo $_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']; ?>" />
                                     <p>シフト予約システムへサインイン</p>

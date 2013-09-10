@@ -20,6 +20,13 @@
                 case "sys-init" :
                     initialize();
                     break;
+                case "add-user" :
+                    add_user();
+                    break;
+                
+                case "login" :
+                    login();
+                    break;
                 
                 default :
                     echo "コアエラー：不正なPOST値";
@@ -29,6 +36,34 @@
     } else {
         echo "コアエラー：不正なページ遷移";
         exit(1);
+    }
+    
+    function login() {
+        $uri = "http://" .$_POST["return-url"]. "?alcode=31";
+        $db = new db_sqlite3("./../db/srs.db");
+        $sql = 'SELECT id, lname, fname FROM user WHERE uname="'. $_POST["uname"] .'" and passwd="'. $_POST["pass"] .'";';
+        $result = $db->query($sql);
+        if (! empty($result) ) {
+            // 該当
+            echo $result["lname"].$result["fname"]."さん　ようこそ";
+            header("location: ./../reserv.html");
+            exit(0);
+        }
+        
+        // 該当なし
+        header("location: $uri");
+    }
+    
+    function add_user() {
+        $uri = "http://".$_POST["return-url"];
+        $db = new db_sqlite3("./../db/srs.db");
+        $sql = 'INSERT INTO user(uname, lname, fname, passwd) VALUES("' .$_POST["uname"]. '", "' .$_POST["lname"]. '", "' .$_POST["fname"]. '", "' .$_POST["pass"]. '");';
+        header("location: $uri");
+        print_r( $db->query($sql) );
+        if ( strcmp($err = $db->last_error(), "not an error") !== 0 ) {
+            echo "<br />\n ERROR: ".$db->last_error();
+        }
+        
     }
     
     function rmuser($target) {

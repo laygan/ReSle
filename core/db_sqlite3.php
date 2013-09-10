@@ -51,7 +51,7 @@ class db_sqlite3 implements db_conector{
         $tmp = htmlspecialchars($str, ENT_NOQUOTES, 'UTF-8');
         $safe_str = $this->dbconn->escapeString($tmp);
         #echo $safe_str;
-        $result = $this->dbconn->querySingle($safe_str, FALSE);
+        $result = $this->dbconn->querySingle($safe_str, TRUE);
         
         return $result;
     }
@@ -66,7 +66,7 @@ class db_sqlite3 implements db_conector{
     }
     
     function last_error() {
-        return lastErrorMsg();
+        return $this->dbconn->lastErrorMsg();
     }
 }
 
