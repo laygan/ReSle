@@ -6,35 +6,31 @@
         <script type="text/javascript" src="./js/jquery.min.js"></script>
         <script type="text/javascript" src="./js/footerFixed.js"></script>
         <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+        <style type="text/css">
+        <!--
+            body { padding-top: 70px; }
+        -->
+        </style>
         <title>シフト予約システム｜管理者</title>
     </head>
     <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <a class="navbar-brand" href="#">シフト予約システム 管理画面</a>
+                <a href="./index.html"><button type="button" class="btn btn-default navbar-btn pull-right">ログイン画面へ</button></a>
+                <p class="navbar-text pull-right"></p>
+                <a href="./reserv.html"><button type="button" class="btn btn-primary navbar-btn pull-right">予約画面へ（要ログイン）</button></a>
+        </nav>
         <div class="row">
             <!-- 左余白とか -->
-            <div class="col-md-2">
-                <a href="./index.html">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">ログイン</button>
-                </a>
-                <a href="./reserv.html">
-                <button type="button" class="btn btn-default btn-lg btn-block">予約画面へ</button>
-                </a>
-            </div>
+            <div class="col-md-2"></div>
             <!-- メインコンテンツ -->
             <div class="col-md-8">
-                <h1>シフト予約システム　管理画面</h1>
-                <hr />
                 <blockquote>
-                    <form method="post" action="./manage/sett.html">
-                        <input type="hidden" name="mode" value="setting" />
-                        <button type="submit" class="btn btn-primary btn-lg">月度シフト予約事前設定</button>
-                    </form>
+                    <a href="./manage/setting.html"><button type="button" class="btn btn-primary btn-lg">月度シフト予約事前設定</button></a>
                     <small>来月度のシフト予約を行う前に行う設定です。シフト予約期間や休業日の設定ができます。</small>
                 </blockquote>
                 <blockquote>
-                    <form method="post" action="./manage/sett.html">
-                        <input type="hidden" name="mode" value="outcsv" />
-                        <button type="submit" class="btn btn-info btn-lg">シフト予約一覧CSV出力</button>
-                    </form>
+                    <a href="./manage/output.html"><button type="button" class="btn btn-info btn-lg">シフト予約一覧CSV出力</button></a>
                     <small>シフト予約にて集まった予約一覧をCSVにて出力します。</small>
                 </blockquote>
                 <blockquote>
@@ -51,6 +47,7 @@
                     </form>
                     <small>初期設定からシステムの初期化を行います。DBも削除されます。</small>
                 </blockquote>
+            </div>
             <!-- 右余白とか -->
             <div class="col-md-2"></div>
         </div>

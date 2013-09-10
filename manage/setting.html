@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./../css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="./../js/bootstrap.min.js"></script>
+        <title>シフト予約システム｜管理｜月度シフト予約事前設定</title>
+    </head>
+    <body>
+        <div class="row">
+            <!-- 左余白 -->
+            <div class="col-md-2"></div>
+            <!-- メインコンテンツ -->
+            <div class="col-md-8">
+                <h1>月度シフト予約事前設定</h1>
+                <!-- 予約設定 -->
+                <form method="post" action="#">
+                <h3>１．シフト予約として、募集するはじめ・おわりの日付を指定してください。</h3>
+                <h3>２．シフト予約を募集する期間を設定してください。</h3>
+                <!-- ここで一旦PHP処理で上記formをdisabledにする
+                     そのあとで、PHPにてカレンダー（シフト予約の）を出力し、休業時間を指定 -->
+                <form method="post" action="./../core/ctrl.php">
+                    <div class="form-group">
+                        <input type="hidden" name="runFlag" value="rm-user" />
+                        <label for="del-uname">Username</label>
+                        <input type="text" class="form-control" name="del-uname" placeholder="ユーザ名" />
+                        <span class="help-block">削除するユーザのユーザ名を入力してください。</span>
+                    </div>
+                    <button type="submit" class="btn btn-danger">実　行</button>
+                </form>
+            </div>
+            <!-- 右余白 -->
+            <div class="col-md-2">　</div>
+        </div>
+    </body>
+</html>
