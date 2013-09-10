@@ -11,7 +11,27 @@
         <title>シフト予約</title>
     </head>
     <body>
-        <h1>シフト予約</h1>
+<?php
+    // Load db_interface
+    require_once('./core/db_sqlite3.php');
+    
+    // セッションスタート
+    session_start();
+    
+    if (! isset($_SESSION["authed-id"]) ){
+        echo "<p>申し訳ありません。ログイン情報を取得できませんでした。<br />\nトップページからログインの再試行をお願いします。</p>";
+    } else {
+        $db = new db_sqlite3("./db/srs.db");
+        $sql = 'SELECT lname, fname FROM user WHERE id='. $_SESSION["authed-id"] .';';
+        $result = $db->query("$sql");
+?>
+        <div style="text-align: right">
+            <form method="post" action="./core/ctrl.php">
+                <input type="hidden" name="runFlag" value="logout" />
+                <button type="submit" class="btn btn-default">ログアウト</button>
+            </form>
+        </div>
+        <h1>シフト予約　<?php echo $result["lname"]; ?> <?php echo $result["fname"]; ?>さん</h1>
         <blockquote>
             <!-- Button trigger modal -->
             <a data-toggle="modal" href="#myModal" class="btn btn-info">このシステムの使い方を表示</a>
@@ -84,6 +104,9 @@
             シフト予約を送信
         </button>
     </div>
+<?php
+    }
+?>
         <div id="footer" style="text-align: right">
             <p>Javascriptを「オン」の状態でご利用ください。<br />
             CSS3を使用しています。最新のブラウザを使用してください。<br />

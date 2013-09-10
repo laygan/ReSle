@@ -28,6 +28,10 @@
                     login();
                     break;
                 
+                case "logout" :
+                    logout();
+                    break;
+                
                 default :
                     echo "コアエラー：不正なPOST値";
                     exit(1);
@@ -38,14 +42,30 @@
         exit(1);
     }
     
+    function logout(){
+        // セッションをとりあえずスタート
+        session_start();
+        
+        // セッション削除
+        unset($_SESSION["authed-id"]);
+        
+        // 関連データ全廃棄
+        if ( session_destroy() ){
+            header("location: ./../index.html?alcode=21");
+        }
+        
+        echo "セッション破棄失敗";
+    }
+    
     function login() {
         $uri = "http://" .$_POST["return-url"]. "?alcode=31";
         $db = new db_sqlite3("./../db/srs.db");
         $sql = 'SELECT id, lname, fname FROM user WHERE uname="'. $_POST["uname"] .'" and passwd="'. $_POST["pass"] .'";';
         $result = $db->query($sql);
         if (! empty($result) ) {
-            // 該当
-            echo $result["lname"].$result["fname"]."さん　ようこそ";
+            // セッションスタート
+            session_start();
+            $_SESSION["authed-id"] = $result["id"];
             header("location: ./../reserv.html");
             exit(0);
         }
