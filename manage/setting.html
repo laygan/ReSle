@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./../css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="./../css/reserv.css" type="text/css" />
         <script type="text/javascript" src="./../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./../js/jquery.min.js"></script>
+        <script type="text/javascript" defer src="./../js/reserv.js"></script>
         <title>シフト予約システム｜管理｜月度シフト予約事前設定</title>
     </head>
     <body>
@@ -13,24 +16,69 @@
             <!-- メインコンテンツ -->
             <div class="col-md-8">
                 <h1>月度シフト予約事前設定</h1>
-                <!-- 予約設定 -->
-                <form method="post" action="#">
-                <h3>１．シフト予約として、募集するはじめ・おわりの日付を指定してください。</h3>
-                <h3>２．シフト予約を募集する期間を設定してください。</h3>
-                <!-- ここで一旦PHP処理で上記formをdisabledにする
-                     そのあとで、PHPにてカレンダー（シフト予約の）を出力し、休業時間を指定 -->
-                <form method="post" action="./../core/ctrl.php">
-                    <div class="form-group">
-                        <input type="hidden" name="runFlag" value="rm-user" />
-                        <label for="del-uname">Username</label>
-                        <input type="text" class="form-control" name="del-uname" placeholder="ユーザ名" />
-                        <span class="help-block">削除するユーザのユーザ名を入力してください。</span>
+                <div class="progress progress-striped active">
+<?php
+    if (isset($_POST["res_s"], $_POST["res_e"], $_POST["rec_s"], $_POST["rec_e"]) ) {
+        $ps_value = 50;
+        $date_form_enabled = false;
+    } else {
+        $ps_value = 20;
+        $date_form_enabled = true;
+    }
+?>
+                    <div class="progress-bar progress-bar-info"  role="progressbar" aria-valuenow="<?php echo $ps_value; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $ps_value; ?>%">
+                        <span class="sr-only"><?php echo $ps_value; ?>% Complete</span>
                     </div>
-                    <button type="submit" class="btn btn-danger">実　行</button>
+                </div>
+                <!-- 予約設定 -->
+                <form method="post" action="">
+                    <h4>１．シフト予約として、募集するはじめ・おわりの日付を指定してください。</h4>
+                    <div class="row">
+                        <label for="reserv">対象予約期間</label>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="date" class="form-control" id="reserv" name="res_s" placeholder="西暦年-月-日" required <?php if (! $date_form_enabled) echo "disabled" ?> />
+                                <span class="help-block">開始日</span>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" class="form-control" id="reserv" name="res_e" placeholder="西暦年-月-日" required <?php if (! $date_form_enabled) echo "disabled" ?> />
+                                <span class="help-block">終了日</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>２．シフト予約を募集する期間を設定してください。</h4>
+                    <div class="row">
+                        <label for="reserv">予約募集期間</label>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="date" class="form-control" id="reserv" name="rec_s" placeholder="西暦年-月-日" required <?php if (! $date_form_enabled) echo "disabled" ?> />
+                                <span class="help-block">開始日</span>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" class="form-control" id="reserv" name="rec_e" placeholder="西暦年-月-日" required <?php if (! $date_form_enabled) echo "disabled" ?> />
+                                <span class="help-block">終了日</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default pull-right"><?php if ($date_form_enabled) { echo "確定"; } else { echo "再設定"; } ?></button>
                 </form>
             </div>
             <!-- 右余白 -->
             <div class="col-md-2">　</div>
         </div>
+                <!-- ここで一旦PHP処理で上記formをdisabledにする
+                     そのあとで、PHPにてカレンダー（シフト予約の）を出力し、休業時間を指定 -->
+<?php
+    if (isset($_POST["res_s"], $_POST["res_e"], $_POST["rec_s"], $_POST["rec_e"]) ) {
+        include_once('./../core/make_grid.php');
+        date_default_timezone_set("Asia/Tokyo");
+    
+        if (strtotime($_POST["res_s"]) > strtotime($_POST["res_e"]) | strtotime($_POST["rec_s"]) > strtotime($_POST["rec_e"]) ) {
+            // 日付設定がおかしい
+        } else {
+            make_grid($_POST["res_s"], $_POST["res_e"]);
+        }
+    }
+?>
     </body>
 </html>

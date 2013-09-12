@@ -1,5 +1,5 @@
 // ここからスタート
-//読み込みが終わったら、getCELL()を実行する
+// 読み込みが終わったら、getCELL()を実行する
 window.addEventListener("load",getCELL,false);
 
 //送信ボタンに関するJavascript
@@ -27,6 +27,9 @@ function getCELL() {
             Cells.onclick =function(){changeCell(this);}
         }
     }
+    
+    // 選択データ格納用のオブジェクトを用意
+    var shifts_obj = 
 }
 
 function changeCell(Cell) { 
@@ -43,13 +46,4 @@ function changeCell(Cell) {
         // 予約
         Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + rowINX +''+ cellINX +'"></div>';
     }
-    
-    /*
-    //取得した値の書き出し
-    res=rowINX + '<br/> '+ cellINX + '<br/>' + cellVal;
-    document.getElementById('Mbox0').innerHTML=res;
-    var Ms1=document.getElementById('Mbox1');
-    Ms1.innerText=Cell.innerHTML;
-    Ms1.textContent=Cell.innerHTML;
-    */
 }
