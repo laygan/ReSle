@@ -77,6 +77,19 @@
             // 日付設定がおかしい
         } else {
             make_grid($_POST["res_s"], $_POST["res_e"]);
+?>
+        <form method="post" action="./../core/reserv.php" id="set" name="set" onSubmit="return getdata();">
+            <input type="hidden" name="res_s" value=<?php echo "\"".$_POST["res_s"]."\""; ?> />
+            <input type="hidden" name="res_e" value=<?php echo "\"".$_POST["res_e"]."\""; ?> />
+            <input type="hidden" name="rec_s" value=<?php echo "\"".$_POST["rec_s"]."\""; ?> />
+            <input type="hidden" name="rec_e" value=<?php echo "\"".$_POST["rec_e"]."\""; ?> />
+            <div style="text-align: center">
+                <button type="submit" id="btn-state" data-loading-text="処理中..." class="btn btn-primary btn-lg">
+                    決　定
+                </button>
+            </div>
+        </form>
+<?php
         }
     }
 ?>
