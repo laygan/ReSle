@@ -106,7 +106,9 @@ function changeCell(Cell) {
                         // 基準点が上か同じ行、かつ左か同じ列
                         for (var i=p_cell[0]; i<=rowINX; i++) {
                             for (var j=p_cell[1]; j<=cellINX; j++) {
-                                if (grids[i-1][j-1] == 0) {
+                                if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
+                                    // 休業セルは変更しない
+                                } else if (grids[i-1][j-1] == 0) {
                                     // 塗り替え対象の今の状態が白色
                                     myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
                                     grids[i-1][j-1] = 1;
@@ -121,7 +123,9 @@ function changeCell(Cell) {
                         // 基準点が上か同じ行、かつ右の列
                         for (var i=p_cell[0]; i<=rowINX; i++) {
                             for (var j=p_cell[1]; j>=cellINX; j--) {
-                                if (grids[i-1][j-1] == 0) {
+                                if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
+                                    // 休業セルは変更しない
+                                } else if (grids[i-1][j-1] == 0) {
                                     // 塗り替え対象の今の状態が白色
                                     myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
                                     grids[i-1][j-1] = 1;
@@ -139,7 +143,9 @@ function changeCell(Cell) {
                         // 基準点が下の行、かつ左か同じ列
                         for (var i=p_cell[0]; i>=rowINX; i--) {
                             for (var j=p_cell[1]; j<=cellINX; j++) {
-                                if (grids[i-1][j-1] == 0) {
+                                if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
+                                    // 休業セルは変更しない
+                                } else if (grids[i-1][j-1] == 0) {
                                     // 塗り替え対象の今の状態が白色
                                     myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
                                     grids[i-1][j-1] = 1;
@@ -154,7 +160,9 @@ function changeCell(Cell) {
                         // 基準点が下の行、かつ右か同じ列
                         for (var i=p_cell[0]; i>=rowINX; i--) {
                             for (var j=p_cell[1]; j>=cellINX; j--) {
-                                if (grids[i-1][j-1] == 0) {
+                                if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
+                                    // 休業セルは変更しない
+                                } else if (grids[i-1][j-1] == 0) {
                                     // 塗り替え対象の今の状態が白色
                                     myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
                                     grids[i-1][j-1] = 1;
@@ -174,21 +182,6 @@ function changeCell(Cell) {
         }
         primary = true;
     }
-    /*
-    if (cellVal.match("#f02")) {
-        // このセルは休業日：何もしない
-    } else if (cellVal.match("#0f0")) {
-        // 予約取り消し
-        Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + rowINX +''+ cellINX +'"></div>';
-        // 配列に"0"をセット
-        grids[rowINX-1][cellINX-1] = 0;
-    } else {
-        // 予約
-        Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + rowINX +''+ cellINX +'"></div>';
-        // 配列に"1"をセット
-        grids[rowINX-1][cellINX-1] = 1;
-    }
-    */
 }
 
 function getdata() {
