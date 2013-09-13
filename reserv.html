@@ -84,28 +84,10 @@
                 </blockquote>
             </div>
         </div>
-        <div class="calendar">
-            <table id="shift">
-                <thead>
-                    <tr>
-                        <th>　</th><th>8:30</th><th>9:00</th><th>9:30</th><th>10:00</th><th>10:30</th><th>11:00</th><th>11:30</th><th>12:00</th><th>12:30</th><th>13:00</th><th>13:30</th><th>14:00</th><th>14:30</th><th>15:00</th><th>15:30</th><th>16:00</th><th>16:30</th><th>17:00</th><th>17:30</th><th>18:00</th><th>18:30</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>９月１日</th>
-                        <td><div style="width: 50px; height:26px; margin: 0px; border: none; background: #f02;" id="element_10"></div></td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tr>
-                        <th>９月２日</th>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<?php
+    include_once('./core/make_grid.php');
+    make_grid("dummy", "dummy", true);
+?>
     </div>
     <div style="text-align: center">
         <button type="button" id="btn-state" data-loading-text="処理中..." class="btn btn-primary btn-lg">

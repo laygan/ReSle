@@ -4,8 +4,8 @@
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./../css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="./../css/reserv.css" type="text/css" />
-        <script type="text/javascript" src="./../js/bootstrap.min.js"></script>
         <script type="text/javascript" src="./../js/jquery.min.js"></script>
+        <script type="text/javascript" src="./../js/bootstrap.min.js"></script>
         <script type="text/javascript" defer src="./../js/reserv.js"></script>
         <title>シフト予約システム｜管理｜月度シフト予約事前設定</title>
     </head>
@@ -76,9 +76,16 @@
         if (strtotime($_POST["res_s"]) > strtotime($_POST["res_e"]) | strtotime($_POST["rec_s"]) > strtotime($_POST["rec_e"]) ) {
             // 日付設定がおかしい
         } else {
-            make_grid($_POST["res_s"], $_POST["res_e"]);
+?>
+        <blockquote>
+            <button type="button" class="btn btn-warning btn-lg" data-toggle="button">毎　週</button>
+            <small>毎週同じ時間帯に設定する場合はこちらのボタンを押してください。それぞれの週に個別で指定したいときはもう一度押してください。</small>
+        </blockquote>
+<?php
+            make_grid($_POST["res_s"], $_POST["res_e"], false);
 ?>
         <form method="post" action="./../core/reserv.php" id="set" name="set" onSubmit="return getdata();">
+            <input type="hidden" name="type" value="setup" />
             <input type="hidden" name="res_s" value=<?php echo "\"".$_POST["res_s"]."\""; ?> />
             <input type="hidden" name="res_e" value=<?php echo "\"".$_POST["res_e"]."\""; ?> />
             <input type="hidden" name="rec_s" value=<?php echo "\"".$_POST["rec_s"]."\""; ?> />
