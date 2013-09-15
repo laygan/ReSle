@@ -109,7 +109,7 @@
         
         $db = new db_sqlite3("./../db/srs.db");
         print_r( $db->query("CREATE TABLE user(id integer primary key autoincrement, uname text UNIQUE NOT NULL, lname text NOT NULL, fname text NOT NULL, passwd integer NOT NULL);") );
-        print_r( $db->query("CREATE TABLE shift(id integer primary key, date text NOT NULL, times text NOT NULL);") );
+        print_r( $db->query("CREATE TABLE shift(id integer NOT NULL, date text NOT NULL, times integer NOT NULL);") );
         
         print "<p>Finished all sequence by SYSTEM.<br />If no errors are displayed, you must resume operation from top page.</p>";
     }

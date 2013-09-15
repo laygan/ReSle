@@ -89,11 +89,14 @@
     make_grid("dummy", "dummy", true);
 ?>
     </div>
-    <div style="text-align: center">
-        <button type="button" id="btn-state" data-loading-text="処理中..." class="btn btn-primary btn-lg">
-            シフト予約を送信
-        </button>
-    </div>
+    <form method="post" action="./core/reserv.php" id="set" name="set" onSubmit="return getdata();">
+        <input type="hidden" name="type" value="reserv" />
+        <div style="text-align: center">
+            <button type="submit" id="btn-state" data-loading-text="処理中..." class="btn btn-primary btn-lg">
+                シフト予約を送信
+            </button>
+        </div>
+    </form>
 <?php
     }
 ?>

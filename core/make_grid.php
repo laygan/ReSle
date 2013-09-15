@@ -115,8 +115,10 @@
                 $i++;
             }
             flock($fp, LOCK_UN);
+            fclose($fp);
             return $buffer;
         }else{
+            fclose($fp);
             die('make_grid：ファイルロックに失敗しました');
             return false;
         }
