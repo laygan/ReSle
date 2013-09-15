@@ -1,9 +1,49 @@
+<?php
+    $start_d; $stop_d;
+    
+    $fp = fopen("./../db/settings.ini", 'r');
+    if ($fp === false) {
+        die("getcsv-load_settingエラー：設定情報がありません");
+    }
+    
+    $buffer = array();
+    $i = 0;
+    if (flock($fp, LOCK_SH)){
+        while (!feof($fp)) {
+            $buffer[$i] = fgets($fp);
+            $i++;
+        }
+        flock($fp, LOCK_UN);
+        fclose($fp);
+        
+        preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[7], $ans);
+        $start_d = $ans[0];
+        preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[8], $ans);
+        $stop_d = $ans[0];
+        
+    }else{
+        fclose($fp);
+    }
+    
+?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./../css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="./../js/jquery.min.js"></script>
         <script type="text/javascript" src="./../js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            // <!--
+            $('#btn-state').click(function () {
+                var btn = $(this);
+                btn.button('loading');
+                setTimeout(function () {
+                    btn.button('reset');
+                }, 10000);
+            });
+            // -->
+        </script>
         <title>シフト予約システム｜管理｜シフト予約一覧CSV出力</title>
     </head>
     <body>
@@ -13,18 +53,12 @@
             <!-- メインコンテンツ -->
             <div class="col-md-8">
                 <h1>シフト予約一覧CSV出力</h1>
-                <!-- 出力期間設定 -->
-                <form method="post" action="#">
-                <h3>１．シフト予約として、募集するはじめ・おわりの日付を指定してください。</h3>
-                <h3>２．シフト予約を募集する期間を設定してください。</h3>
+                <h3>現在出力できるシフト予約表は、<?php echo $start_d; ?>から<?php echo $stop_d; ?>です。</h3>
                 <form method="post" action="./../core/ctrl.php">
-                    <div class="form-group">
-                        <input type="hidden" name="runFlag" value="rm-user" />
-                        <label for="del-uname">Username</label>
-                        <input type="text" class="form-control" name="del-uname" placeholder="ユーザ名" />
-                        <span class="help-block">削除するユーザのユーザ名を入力してください。</span>
-                    </div>
-                    <button type="submit" class="btn btn-danger">実　行</button>
+                    <input type="hidden" name="runFlag" value="getcsv" />
+                    <input type="hidden" name="start" value="<?php echo $start_d; ?>" />
+                    <input type="hidden" name="stop" value="</?php echo $stop_d; ?>" />
+                    <button type="submit" id="btn-state" data-loading-text="処理中..." class="btn btn-primary btn-lg">実　行</button>
                 </form>
             </div>
             <!-- 右余白 -->
