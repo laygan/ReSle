@@ -31,6 +31,7 @@
             $db = new db_sqlite3("./../db/srs.db");
             // 前予約データの一括消去
             $sql = 'DELETE FROM shift WHERE id='.$_SESSION["authed-id"].';';
+            $db->query($sql);
             date_default_timezone_set("Asia/Tokyo");
             $start = new DateTime($start_d);
             $stop = new DateTime($stop_d);
