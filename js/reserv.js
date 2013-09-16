@@ -8,7 +8,7 @@ $('#btn-state').click(function () {
     btn.button('loading');
     setTimeout(function () {
         btn.button('reset');
-    }, 10000);
+    }, 60000);
 });
 
 
