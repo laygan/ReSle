@@ -1,20 +1,25 @@
 <?php
-    session_start();
-    if (! isset($_SESSION["authed-id"]) ) {
-        echo "ログイン後にもう一度試行してください。";
-        exit(1);
-    }
-    
-    if ($_GET["force"] == 1) {
-    
+    if ( isset($_GET["force"]) ) {
+        if ($_GET["force"] == 1) {
+        
+        } else {
+            echo "管理者権限がありません。";
+            exit(1);
+        }
     } else {
+        session_start();
+        if (! isset($_SESSION["authed-id"]) ) {
+            echo "ログイン後にもう一度試行してください。";
+            exit(1);
+        }
+        
         // db interface
         require_once('./core/db_sqlite3.php');
         $db = new db_sqlite3("./db/srs.db");
         
         $sql = 'SELECT adm FROM user WHERE id='.$_SESSION["authed-id"].';';
         $result = $db->query($sql);
-        if ($result["adm"] != true) {
+        if ($result["adm"] != "true") {
             echo "管理者権限がありません。";
             exit(1);
         }

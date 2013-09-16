@@ -171,7 +171,7 @@
     function add_user() {
         $uri = "http://".$_POST["return-url"];
         $db = new db_sqlite3("./../db/srs.db");
-        $sql = 'INSERT INTO user(uname, lname, fname, passwd, adm) VALUES("' .$_POST["uname"]. '", "' .$_POST["lname"]. '", "' .$_POST["fname"]. '", "' .$_POST["pass"]. '", false);';
+        $sql = 'INSERT INTO user(uname, lname, fname, passwd, adm) VALUES("' .$_POST["uname"]. '", "' .$_POST["lname"]. '", "' .$_POST["fname"]. '", "' .$_POST["pass"]. '", "false");';
         header("location: $uri");
         print_r( $db->query($sql) );
         if ( strcmp($err = $db->last_error(), "not an error") !== 0 ) {

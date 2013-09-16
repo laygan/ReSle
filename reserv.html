@@ -22,10 +22,11 @@
         echo "<p>申し訳ありません。ログイン情報を取得できませんでした。<br />\nトップページからログインの再試行をお願いします。</p>";
     } else {
         $db = new db_sqlite3("./db/srs.db");
-        $sql = 'SELECT lname, fname FROM user WHERE id='. $_SESSION["authed-id"] .';';
+        $sql = 'SELECT lname, fname, adm FROM user WHERE id='. $_SESSION["authed-id"] .';';
         $result = $db->query("$sql");
+        
 ?>
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-<?php if($result["adm"]=="true"){echo "inverse";}else{echo "default";} ?> navbar-fixed-top" role="navigation">
                 <a class="navbar-brand" href="#">学習支援センター ヘルプデスクスタッフ シフト予約</a>
                 <form method="post" action="./core/ctrl.php">
                     <input type="hidden" name="runFlag" value="logout" />
