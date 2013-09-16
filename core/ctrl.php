@@ -171,7 +171,7 @@
     function add_user() {
         $uri = "http://".$_POST["return-url"];
         $db = new db_sqlite3("./../db/srs.db");
-        $sql = 'INSERT INTO user(uname, lname, fname, passwd) VALUES("' .$_POST["uname"]. '", "' .$_POST["lname"]. '", "' .$_POST["fname"]. '", "' .$_POST["pass"]. '");';
+        $sql = 'INSERT INTO user(uname, lname, fname, passwd, adm) VALUES("' .$_POST["uname"]. '", "' .$_POST["lname"]. '", "' .$_POST["fname"]. '", "' .$_POST["pass"]. '", false);';
         header("location: $uri");
         print_r( $db->query($sql) );
         if ( strcmp($err = $db->last_error(), "not an error") !== 0 ) {
@@ -202,7 +202,7 @@
         print_r($output);
         
         $db = new db_sqlite3("./../db/srs.db");
-        print_r( $db->query("CREATE TABLE user(id integer primary key autoincrement, uname text UNIQUE NOT NULL, lname text NOT NULL, fname text NOT NULL, passwd integer NOT NULL);") );
+        print_r( $db->query("CREATE TABLE user(id integer primary key autoincrement, uname text UNIQUE NOT NULL, lname text NOT NULL, fname text NOT NULL, passwd integer NOT NULL, adm text);") );
         print_r( $db->query("CREATE TABLE shift(id integer NOT NULL, date text NOT NULL, times integer NOT NULL);") );
         
         print "<p>Finished all sequence by SYSTEM.<br />If no errors are displayed, you must resume operation from top page.</p>";
