@@ -32,6 +32,9 @@
                     logout();
                     break;
                 
+                case "getcsv" :
+                    build_csv();
+                    break;
                 default :
                     echo "コアエラー：不正なPOST値";
                     exit(1);
@@ -41,6 +44,97 @@
         echo "コアエラー：不正なページ遷移";
         exit(1);
     }
+    
+    function build_csv() {
+        if (! isset($_POST["start"], $_POST["stop"]) ){
+            die("コアエラー：POST値不足");
+        }
+        
+        // CSVファイル名作成
+        $file_name = "シフト表".$_POST["start"] . $_POST["stop"].".csv";
+        
+        // 日付計算用
+        date_default_timezone_set("Asia/Tokyo");
+        $start_d = new DateTime($_POST["start"]);
+        $stop_d = new DateTime($_POST["stop"]);
+        
+        // CSVファイル書き込み用バッファ作成開始
+        $csv_buffer = array();
+        $csv_buffer[0] = array("シフト表");
+        $csv_buffer[1] = array();
+        $csv_buffer[2] = array("　", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30");
+        
+        // シフト書き込みループ回数
+        $interval = $stop_d->diff($start_d);
+        $loops = 1+ $interval->format("%a");
+        
+        // シフト書き込み開始
+        $db = new db_sqlite3("./../db/srs.db");
+        for ($i=0; $i<$loops; $i++) {
+            // 一日におけるシフト予約で、一番はやいID
+            $sql = 'SELECT min(id) FROM shift WHERE date="'. $start_d->format("Y-m-d") .'" and times!=0;';
+            $first = $db->query($sql);
+            
+            // 一日におけるシフト予約で、一番遅いID
+            $sql = 'SELECT max(id) FROM shift WHERE date="'. $start_d->format("Y-m-d") .'" and times!=0;';
+            $last = $db->query($sql);
+            
+            if ( empty($first["min(id)"]) ) {
+                $csv_buffer[] = array($start_d->format("Y-m-d"));
+            } else {
+                for ($j=$first["min(id)"]; $j<=$last["max(id)"]; $j++) {
+                    $sql = 'SELECT times FROM shift WHERE id='.$j.' and date="'.$start_d->format("Y-m-d").'";';
+                    $time = $db->query($sql);
+                    
+                    // 10進->２進化
+                    $time_2 = base_convert($time["times"], 10, 2);
+                    $length = strlen($time_2);
+                    // 桁あわせ
+                    for ($k=$length; $k<21; $k++) {
+                        $tmp = "0".(string)$time_2;
+                        $time_2 = $tmp;
+                    }
+                    // 日付出力
+                    $csv_buffer[] = array( $start_d->format("Y-m-d") );
+                    $counter = count($csv_buffer) -1;
+                    
+                    // 名前検索
+                    $sql = "SELECT lname, fname FROM user WHERE id=".$j.";";
+                    $name = $db->query($sql);
+                    
+                    // 予約指定判定
+                    for ($k=0; $k<21; $k++) {
+                        if ($time_2[$k] === "1") {
+                            $csv_buffer[$counter][] = $name["lname"]." ".$name["fname"];
+                        } else {
+                            $csv_buffer[$counter][] = "";
+                        }
+                    }
+                }
+            }
+            
+            $start_d->modify("+1 day");
+        }
+        
+        // CSVデータの作成
+        $csv_data = "";
+        
+        foreach ($csv_buffer as $key1 => $val1) {
+            foreach ($val1 as $key2 => $val2) {
+                $csv_data .= (string)$val2.",";
+            }
+            $csv_data .= "\n";
+        }
+        // MIMEタイプの設定
+        header("Content-Type: application/octet-stream");
+        // ファイル名の表示
+        header("Content-Disposition: attachment; filename=$file_name");
+        // 文字化け対策
+        header("Content-Type: text/csv; charset=Shift-JIS");
+        // データの出力
+        echo mb_convert_encoding($csv_data, "SJIS", "UTF-8");
+    }
+    /* End of Function */
     
     function logout(){
         // セッションをとりあえずスタート
