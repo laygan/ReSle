@@ -5,15 +5,19 @@
         exit(1);
     }
     
-    // db interface
-    require_once('./core/db_sqlite3.php');
-    $db = new db_sqlite3("./db/srs.db");
+    if ($_GET["force"] == 1) {
     
-    $sql = 'SELECT adm FROM user WHERE id='.$_SESSION["authed-id"].';';
-    $result = $db->query($sql);
-    if ($result["adm"] != true) {
-        echo "管理者権限がありません。";
-        exit(1);
+    } else {
+        // db interface
+        require_once('./core/db_sqlite3.php');
+        $db = new db_sqlite3("./db/srs.db");
+        
+        $sql = 'SELECT adm FROM user WHERE id='.$_SESSION["authed-id"].';';
+        $result = $db->query($sql);
+        if ($result["adm"] != true) {
+            echo "管理者権限がありません。";
+            exit(1);
+        }
     }
 ?>
 <!DOCTYPE html>
