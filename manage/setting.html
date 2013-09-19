@@ -1,3 +1,34 @@
+<?php
+    $start_d; $stop_d;
+    
+    $fp = fopen("./../db/settings.ini", 'r');
+    if ($fp === false) {
+        die("getcsv-load_settingエラー：設定情報がありません");
+    }
+    
+    $buffer = array();
+    $i = 0;
+    if (flock($fp, LOCK_SH)){
+        while (!feof($fp)) {
+            $buffer[$i] = fgets($fp);
+            $i++;
+        }
+        flock($fp, LOCK_UN);
+        fclose($fp);
+        
+        preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[7], $ans);
+        $start_d = $ans[0];
+        preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[8], $ans);
+        $stop_d = $ans[0];
+        preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[9], $ans);
+        $began_d = $ans[0];
+        preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[10], $ans);
+        $finish_d = $ans[0];
+    }else{
+        fclose($fp);
+    }
+    
+?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -16,6 +47,11 @@
             <!-- メインコンテンツ -->
             <div class="col-md-8">
                 <h1>月度シフト予約事前設定</h1>
+                <h3>
+                    現在<?php echo $start_d; ?>から<?php echo $stop_d; ?>までのシフト予約を募集しています。<br />
+                    この募集は<?php echo $began_d; ?>から開始されて<?php echo $finish_d; ?>に締め切り予定です。<br />
+                    新しく予約設定を指定した段階で、現在の予約設定は消去されますのでご注意ください。
+                </h3>
                 <div class="progress progress-striped active">
 <?php
     if (isset($_POST["res_s"], $_POST["res_e"], $_POST["rec_s"], $_POST["rec_e"]) ) {
