@@ -80,7 +80,7 @@
             echo "                <th>";
             // 日付生成
             $start->modify("+1 day");
-            echo $start->format("m月d日"). $week_str_list[ $datetime->format('w') ];
+            echo $start->format("m月d日"). $week_str_list[ $start->format('w') ];
             echo "</th>\n";
             for ($j=0; $j<21; $j++) {
                 if ($reserv) {
