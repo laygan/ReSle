@@ -53,8 +53,11 @@ function isZen(str){
 function convert(input, pass) {
     var out;
 
-    out = des_cbc_encrypt(pass, input);
-    //out = base64encode(out);
+    // out = des_cbc_encrypt(pass, input);
+    // out = base64encode(out);
+    
+    plainText = des.decrypt( input, pass );
+    out = base64.encode( plainText );
     
     return out;
 }
