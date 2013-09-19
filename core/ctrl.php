@@ -84,8 +84,9 @@
             } else {
                 for ($j=$first["min(id)"]; $j<=$last["max(id)"]; $j++) {
                     $sql = 'SELECT times FROM shift WHERE id='.$j.' and date="'.$start_d->format("Y-m-d").'";';
+                    echo $sql."\n";
                     $time = $db->query($sql);
-                    
+                    print_r($time);
                     // 10進->２進化
                     $time_2 = base_convert($time["times"], 10, 2);
                     $length = strlen($time_2);
