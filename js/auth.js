@@ -5,6 +5,7 @@ function auth() {
     if (passwd != "" && uname != "") {
         document.getElementById("passwd").value="rgt4hyjuk8j7uj65h4tyju54hg3htjyruk6r5j;6hetyrku5j46hertejysku5e7j64";
         var path = convert(uname, passwd);
+        window.alert(path);
         make_hidden('pass', path, 'signin');
         return true;
         exit(0);
