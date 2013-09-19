@@ -84,31 +84,33 @@
             } else {
                 for ($j=$first["min(id)"]; $j<=$last["max(id)"]; $j++) {
                     $sql = 'SELECT times FROM shift WHERE id='.$j.' and date="'.$start_d->format("Y-m-d").'";';
-                    echo $sql."\n";
                     $time = $db->query($sql);
-                    print_r($time);
-                    // 10進->２進化
-                    $time_2 = base_convert($time["times"], 10, 2);
-                    $length = strlen($time_2);
-                    // 桁あわせ
-                    for ($k=$length; $k<21; $k++) {
-                        $tmp = "0".(string)$time_2;
-                        $time_2 = $tmp;
-                    }
-                    // 日付出力
-                    $csv_buffer[] = array( $start_d->format("Y-m-d") );
-                    $counter = count($csv_buffer) -1;
-                    
-                    // 名前検索
-                    $sql = "SELECT lname, fname FROM user WHERE id=".$j.";";
-                    $name = $db->query($sql);
-                    
-                    // 予約指定判定
-                    for ($k=0; $k<21; $k++) {
-                        if ($time_2[$k] === "1") {
-                            $csv_buffer[$counter][] = $name["lname"]." ".$name["fname"];
-                        } else {
-                            $csv_buffer[$counter][] = "";
+                    if ( empty($time) ) {
+                        
+                    } else {
+                        // 10進->２進化
+                        $time_2 = base_convert($time["times"], 10, 2);
+                        $length = strlen($time_2);
+                        // 桁あわせ
+                        for ($k=$length; $k<21; $k++) {
+                            $tmp = "0".(string)$time_2;
+                            $time_2 = $tmp;
+                        }
+                        // 日付出力
+                        $csv_buffer[] = array( $start_d->format("Y-m-d") );
+                        $counter = count($csv_buffer) -1;
+                        
+                        // 名前検索
+                        $sql = "SELECT lname, fname FROM user WHERE id=".$j.";";
+                        $name = $db->query($sql);
+                        
+                        // 予約指定判定
+                        for ($k=0; $k<21; $k++) {
+                            if ($time_2[$k] === "1") {
+                                $csv_buffer[$counter][] = $name["lname"]." ".$name["fname"];
+                            } else {
+                                $csv_buffer[$counter][] = "";
+                            }
                         }
                     }
                 }
