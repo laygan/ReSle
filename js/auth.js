@@ -54,7 +54,7 @@ function convert(input, pass) {
     var out;
 
     out = des_cbc_encrypt(pass, input);
-    out = base64encode(out);
+    //out = base64encode(out);
     
     return out;
 }
