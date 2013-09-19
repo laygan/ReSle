@@ -54,6 +54,7 @@
         $interval = $stop->diff($start);
         $loops = 1+ $interval->format("%a");
         $start->modify("-1 day");
+        $week_str_list = array( '(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)');
         
         // カレンダー出力開始
         echo "<div class=\"calendar\">\n";
@@ -79,8 +80,8 @@
             echo "                <th>";
             // 日付生成
             $start->modify("+1 day");
-            echo $start->format("m月d日");
-            echo "</th>\n";
+            echo $start->format("m月d日"). $week_str_list[ $datetime->format('w') ];
+            echo "</th>\n";s
             for ($j=0; $j<21; $j++) {
                 if ($reserv) {
                     if ($out_2[$j] === "1") {
