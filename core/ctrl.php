@@ -80,7 +80,7 @@
             $last = $db->query($sql);
             
             if ( empty($first["min(id)"]) ) {
-                $csv_buffer[] = array($start_d->format("Y-m-d"));
+                $csv_buffer[] = array($start_d->format("Y/m/d"). $week_str_list[ $start_d->format('w') ]);
             } else {
                 for ($j=$first["min(id)"]; $j<=$last["max(id)"]; $j++) {
                     $sql = 'SELECT times FROM shift WHERE id='.$j.' and date="'.$start_d->format("Y-m-d").'";';
