@@ -67,7 +67,7 @@
         // シフト書き込みループ回数
         $interval = $stop_d->diff($start_d);
         $loops = 1+ $interval->format("%a");
-        
+        $week_str_list = array( '(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)');
         // シフト書き込み開始
         $db = new db_sqlite3("./../db/srs.db");
         for ($i=0; $i<$loops; $i++) {
@@ -97,7 +97,7 @@
                             $time_2 = $tmp;
                         }
                         // 日付出力
-                        $csv_buffer[] = array( $start_d->format("Y-m-d") );
+                        $csv_buffer[] = array( $start_d->format("Y/m/d"). $week_str_list[ $start_d->format('w') ] );
                         $counter = count($csv_buffer) -1;
                         
                         // 名前検索
