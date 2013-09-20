@@ -11,6 +11,15 @@ $('#btn-state').click(function () {
     }, 60000);
 });
 
+// 毎週ボタンに関するJavascript
+var every_week = false;
+$('#every').click(function () {
+    if (every_week) {   // 押されている
+        every_week = false;
+    } else {            // 押されていない
+        every_week = true;
+    }
+});
 
 /*
  * シフト予約表においては、ヘッダが配列インデックス[0]に当たる。
@@ -25,10 +34,11 @@ $('#btn-state').click(function () {
 var grids;
 var primary = true;
 var p_cell = Array(2);
+var myTbl;
 
 function getCELL() {
     // table id:shiftのDOMを取得
-    var myTbl = document.getElementById("shift");
+    myTbl = document.getElementById("shift");
     
     // 選択データ格納用の配列
     grids = new Array(myTbl.rows.length);
@@ -89,17 +99,36 @@ function changeCell(Cell) {
                 // 同じ場所
                 if (grids[ p_cell[0]-1 ][ p_cell[1]-1 ] == 0) {
                     // 予約
-                    Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + rowINX +''+ cellINX +'"></div>';
-                    grids[rowINX-1][cellINX-1] = 1;
+                    if (every_week) {
+                        for (var k=rowINX; k<myTbl.rows.length; k+=7) {
+                            myTbl.rows[k].cells[cellINX].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
+                            grids[k-1][cellINX-1] = 1;
+                        }
+                        for (var k=rowINX; k>0; k-=7) {
+                            myTbl.rows[k].cells[cellINX].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
+                            grids[k-1][cellINX-1] = 1;
+                        }
+                    } else {
+                        Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + rowINX +''+ cellINX +'"></div>';
+                        grids[rowINX-1][cellINX-1] = 1;
+                    }
                 } else {
                     // 取り消し
-                    Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + rowINX +''+ cellINX +'"></div>';
-                    grids[rowINX-1][cellINX-1] = 0;
+                    if (every_week) {
+                        for (var k=rowINX; k<myTbl.rows.length; k+=7) {
+                            myTbl.rows[k].cells[cellINX].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
+                            grids[k-1][cellINX-1] = 0;
+                        }
+                        for (var k=rowINX; k>0; k-=7) {
+                            myTbl.rows[k].cells[cellINX].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
+                            grids[k-1][cellINX-1] = 0;
+                        }
+                    } else {
+                        Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + rowINX +''+ cellINX +'"></div>';
+                        grids[rowINX-1][cellINX-1] = 0;
+                    }
                 }
             } else {
-                // シフト予約テーブルのDOMを取得
-                var myTbl = document.getElementById("shift");
-                
                 if (p_cell[0] <= rowINX) {
                     // 基準点が上か同じ行
                     if (p_cell[1] <= cellINX) {
