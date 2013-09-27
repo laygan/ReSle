@@ -85,7 +85,7 @@
                 for ($j=$first["min(id)"]; $j<=$last["max(id)"]; $j++) {
                     $sql = 'SELECT times FROM shift WHERE id='.$j.' and date="'.$start_d->format("Y-m-d").'";';
                     $time = $db->query($sql);
-                    if ( empty($time) ) {
+                    if ( $time["times"] === "0" ) {
                         
                     } else {
                         // 10進->２進化
