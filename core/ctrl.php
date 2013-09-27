@@ -85,7 +85,9 @@
                 for ($j=$first["min(id)"]; $j<=$last["max(id)"]; $j++) {
                     $sql = 'SELECT times FROM shift WHERE id='.$j.' and date="'.$start_d->format("Y-m-d").'";';
                     $time = $db->query($sql);
-                    if ( $time["times"] === "0" ) {
+                    if ( empty($time) ) {
+                        
+                    } else if( $time["times"] == "0" ) {
                         
                     } else {
                         // 10進->２進化
@@ -115,7 +117,7 @@
                     }
                 }
             }
-            
+            $csv_buffer[] = array();
             $start_d->modify("+1 day");
         }
         
