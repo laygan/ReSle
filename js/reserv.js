@@ -11,8 +11,9 @@ $('#btn-state').click(function () {
     }, 60000);
 });
 
-/*/ 毎週ボタンに関するJavascript
+// 毎週ボタンに関するJavascript
 var every_week = false;
+/*
 $('#every').click(function () {
     if (every_week) {   // 押されている
         every_week = false;
