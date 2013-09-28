@@ -1,0 +1,88 @@
+<?php
+    $version = "取得失敗";
+    $comment = "";
+    
+    $fp = fopen("./ver.tx", 'r');
+    if ($fp === false) {
+        die("ファイルエラー：バージョン情報ファイルがありません");
+    }
+    
+    $buffer = array();
+    $i = 0;
+    if (flock($fp, LOCK_SH)){
+        while (!feof($fp)) {
+            $buffer[$i] = fgets($fp);
+            $i++;
+        }
+        flock($fp, LOCK_UN);
+        fclose($fp);
+        
+        // バージョン情報取得
+        preg_match("/[Version: ]\d+[.]\d+/", $buffer[1], $ans);
+        $version = $ans[0];
+        
+        // リリースコメントを読み込み
+        for ($j=4; $j<$i-1; $j++) {
+            preg_match("/\d+[.]\d+[:]\s\S+/", $buffer[$j], $ans);
+            $comment .= $ans[0]."<br />\n";
+        }
+    }else{
+        fclose($fp);
+    }
+    
+?>
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" />
+        <title>シフト予約システム｜このシステムについて</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <h1>シフト予約システム on cloud　<small>このシステムについて</small></h1>
+            </div>
+            <div class="jumbotron">
+                <h1>Hello, World!</h1>
+                <p>シフト予約をいつでもどこでも、いろいろなデバイスで可能にするシステムです。</p>
+                <p>
+                    <a href="index.html"><button class="btn btn-lg btn-primary">さっそく使ってみる！</button></a>　
+                    <a href="index.html?alcode=39"><button class="btn btn-xs btn-default">製作者から</button></a>
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel panel-heading"><h4>バージョン情報</h4></div>
+                        <div class="panel-body">
+                            <p>現在運用中のバージョンは</p>
+                            <div style="text-align: center">
+                                <h1><?php echo $version ?></h1>
+                            </div>
+                            <p>です。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>Github(Global)</h4></div>
+                        <div class="panel-body">
+                            <p>最新のバージョンなどの確認はこちらから行えます。</p>
+                            <a href="https://github.com/laygan/ReSle" target="_blank"><button class="btn btn-lg btn-info">GitHubへ移動</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4>リリース毎変更情報</h4></div>
+                <div class="panel-body">
+                    <p>
+                        <?php echo $comment; ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
