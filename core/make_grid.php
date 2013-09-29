@@ -57,6 +57,7 @@
         $week_str_list = array( '(日)', '(月)', '(火)', '(水)', '(木)', '(金)', '(土)');
         
         // カレンダー出力開始
+        echo "<p>講義時間：１限目＝9:00-10:30　２限目＝10:40-12:10　３限目＝13:00-14:30　４限目＝14:40-16:10　５限目＝16:20-17:50　６限目＝18:00-19:30</p>\n";
         echo "<div class=\"calendar\">\n";
         echo "    <table id=\"shift\">\n";
         echo "        <thead>\n";
@@ -86,7 +87,11 @@
                 if ($reserv) {
                     if ($out_2[$j] === "1") {
                         echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #f02;\" id=\"element_".$i.$j."\"></div></td>";
-                    } else {
+                    } else if ( ($j>=1 && $j<=3) || ($j>=9 && $j<=11) || ($j>=16 && $j<=18) ) {
+                        echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #ddd;\" id=\"element_".$i.$j."\"></div></td>";
+                    } else if ( ($j>=4 && $j<=7) || ($j>=12 && $j<=15)) {
+                        echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #eee;\" id=\"element_".$i.$j."\"></div></td>";
+                    }else {
                         echo "                <td></td>\n";
                     }
                 } else {
