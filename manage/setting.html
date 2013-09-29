@@ -59,7 +59,7 @@
 ?>
                 <div class="progress progress-striped active">
 <?php
-    if (isset($_POST["res_s"], $_POST["res_e"], $_POST["rec_s"], $_POST["rec_e"]) ) {
+    if ( !empty($_POST["res_s"]) && !empty($_POST["res_e"]) && !empty($_POST["rec_s"]) && !empty($_POST["rec_e"]) ) {
         $ps_value = 50;
         $date_form_enabled = false;
     } else {
@@ -110,13 +110,48 @@
                 <!-- ここで一旦PHP処理で上記formをdisabledにする
                      そのあとで、PHPにてカレンダー（シフト予約の）を出力し、休業時間を指定 -->
 <?php
-    if (isset($_POST["res_s"], $_POST["res_e"], $_POST["rec_s"], $_POST["rec_e"]) ) {
-        include_once('./../core/make_grid.php');
+    if ( !empty($_POST["res_s"]) && !empty($_POST["res_e"]) && !empty($_POST["rec_s"]) && !empty($_POST["rec_e"]) ) {
+        include_once('./../core/make_grid.php'); 
         date_default_timezone_set("Asia/Tokyo");
     
         if (strtotime($_POST["res_s"]) > strtotime($_POST["res_e"]) | strtotime($_POST["rec_s"]) > strtotime($_POST["rec_e"]) ) {
             // 日付設定がおかしい
+            echo "<div style=\"text-align:center\"><h4>開始日と終了日の設定が逆転しています。「再設定」してください。<h4></div>\n";
+            exit(1);
         } else {
+            $date = array();
+            $date[0] = $_POST["res_s"];
+            $date[1] = $_POST["res_e"];
+            $date[2] = $_POST["rec_s"];
+            $date[3] = $_POST["rec_e"];
+            
+            for ($i=0; $i<4; $i++) {
+                $tmp = array();
+                $tmp["Y"] = intval($date[$i][0].$date[$i][1].$date[$i][2].$date[$i][3]);
+                $tmp["m"] = intval($date[$i][5].$date[$i][6]);
+                $tmp["d"] = intval($date[$i][8].$date[$i][9]);
+                
+                if (! checkdate( $tmp["m"], $tmp["d"], $tmp["Y"]) ) {
+                    switch ($i) {
+                        case 0:
+                            echo "<div style=\"text-align:center\"><h4>指定された<strong>対象予約期間 開始日</strong>は存在しない日付のようです。<h4></div>\n";
+                            break;
+                        
+                        case 1:
+                            echo "<div style=\"text-align:center\"><h4>指定された<strong>対象予約期間 終了日</strong>は存在しない日付のようです。<h4></div>\n";
+                            break;
+                        
+                        case 2:
+                            echo "<div style=\"text-align:center\"><h4>指定された<strong>予約募集期間 開始日</strong>は存在しない日付のようです。<h4></div>\n";
+                            break;
+                            
+                        case 3:
+                            echo "<div style=\"text-align:center\"><h4>指定された<strong>予約募集期間 終了日</strong>は存在しない日付のようです。<h4></div>\n";
+                            break;
+                    }
+                    exit(1);
+                }
+            }
 ?>
         <blockquote>
             <button type="button" class="btn btn-warning btn-lg" data-toggle="button">毎　週</button>
@@ -139,6 +174,8 @@
         </form>
 <?php
         }
+    } else {
+        echo "<div style=\"text-align:center\"><h4>まずは入力項目をすべて埋めてください。<h4></div>\n";
     }
 ?>
     </body>
