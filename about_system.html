@@ -18,7 +18,7 @@
         fclose($fp);
         
         // バージョン情報取得
-        preg_match("/[Version: ]\d+[.]\d+/", $buffer[1], $ans);
+        preg_match("/[Version: ]\d+([.]\d)+/", $buffer[1], $ans);
         $version = $ans[0];
         
         // リリースコメントを読み込み
