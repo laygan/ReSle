@@ -101,34 +101,10 @@ function changeCell(Cell) {
                 // 同じ場所
                 if (grids[ p_cell[0]-1 ][ p_cell[1]-1 ] == 0) {
                     // 予約
-                    if (every_week) {
-                        for (var k=rowINX; k<myTbl.rows.length; k+=7) {
-                            myTbl.rows[k].cells[cellINX].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
-                            grids[k-1][cellINX-1] = 1;
-                        }
-                        for (var k=rowINX; k>0; k-=7) {
-                            myTbl.rows[k].cells[cellINX].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
-                            grids[k-1][cellINX-1] = 1;
-                        }
-                    } else {
-                        Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + rowINX +''+ cellINX +'"></div>';
-                        grids[rowINX-1][cellINX-1] = 1;
-                    }
+                    paint_cell(i, j);
                 } else {
                     // 取り消し
-                    if (every_week) {
-                        for (var k=rowINX; k<myTbl.rows.length; k+=7) {
-                            myTbl.rows[k].cells[cellINX].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
-                            grids[k-1][cellINX-1] = 0;
-                        }
-                        for (var k=rowINX; k>0; k-=7) {
-                            myTbl.rows[k].cells[cellINX].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
-                            grids[k-1][cellINX-1] = 0;
-                        }
-                    } else {
-                        Cell.innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + rowINX +''+ cellINX +'"></div>';
-                        grids[rowINX-1][cellINX-1] = 0;
-                    }
+                    paint_cell(i, j);
                 }
             } else {
                 if (p_cell[0] <= rowINX) {
@@ -137,34 +113,14 @@ function changeCell(Cell) {
                         // 基準点が上か同じ行、かつ左か同じ列
                         for (var i=p_cell[0]; i<=rowINX; i++) {
                             for (var j=p_cell[1]; j<=cellINX; j++) {
-                                if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
-                                    // 休業セルは変更しない
-                                } else if (grids[i-1][j-1] == 0) {
-                                    // 塗り替え対象の今の状態が白色
-                                    myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
-                                    grids[i-1][j-1] = 1;
-                                } else if (grids[i-1][j-1] == 1) {
-                                    // 塗り替え対象の今の状態が緑色
-                                    myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
-                                    grids[i-1][j-1] = 0;
-                                } else {}
+                                paint_cell(i, j);
                             }
                         }
                     } else {
                         // 基準点が上か同じ行、かつ右の列
                         for (var i=p_cell[0]; i<=rowINX; i++) {
                             for (var j=p_cell[1]; j>=cellINX; j--) {
-                                if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
-                                    // 休業セルは変更しない
-                                } else if (grids[i-1][j-1] == 0) {
-                                    // 塗り替え対象の今の状態が白色
-                                    myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
-                                    grids[i-1][j-1] = 1;
-                                } else if (grids[i-1][j-1] == 1) {
-                                    // 塗り替え対象の今の状態が緑色
-                                    myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
-                                    grids[i-1][j-1] = 0;
-                                } else {}
+                                paint_cell(i, j);
                             }
                         }
                     }
@@ -174,34 +130,14 @@ function changeCell(Cell) {
                         // 基準点が下の行、かつ左か同じ列
                         for (var i=p_cell[0]; i>=rowINX; i--) {
                             for (var j=p_cell[1]; j<=cellINX; j++) {
-                                if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
-                                    // 休業セルは変更しない
-                                } else if (grids[i-1][j-1] == 0) {
-                                    // 塗り替え対象の今の状態が白色
-                                    myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
-                                    grids[i-1][j-1] = 1;
-                                } else if (grids[i-1][j-1] == 1) {
-                                    // 塗り替え対象の今の状態が緑色
-                                    myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
-                                    grids[i-1][j-1] = 0;
-                                } else {}
+                                paint_cell(i, j);
                             }
                         }
                     } else {
                         // 基準点が下の行、かつ右か同じ列
                         for (var i=p_cell[0]; i>=rowINX; i--) {
                             for (var j=p_cell[1]; j>=cellINX; j--) {
-                                if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
-                                    // 休業セルは変更しない
-                                } else if (grids[i-1][j-1] == 0) {
-                                    // 塗り替え対象の今の状態が白色
-                                    myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
-                                    grids[i-1][j-1] = 1;
-                                } else if (grids[i-1][j-1] == 1) {
-                                    // 塗り替え対象の今の状態が緑色
-                                    myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
-                                    grids[i-1][j-1] = 0;
-                                } else {}
+                                paint_cell(i, j);
                             }
                         }
                     }
@@ -213,6 +149,20 @@ function changeCell(Cell) {
         }
         primary = true;
     }
+}
+
+function paint_cell(x, y) {
+    if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
+        // 休業セルは変更しない
+    } else if (grids[i-1][j-1] == 0) {
+        // 塗り替え対象の今の状態が白色
+        myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
+        grids[i-1][j-1] = 1;
+    } else if (grids[i-1][j-1] == 1) {
+        // 塗り替え対象の今の状態が緑色
+        myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
+        grids[i-1][j-1] = 0;
+    } else {}
 }
 
 function getdata() {
