@@ -13,7 +13,7 @@ $('#btn-state').click(function () {
 
 // 毎週ボタンに関するJavascript
 var every_week = false;
-/*
+
 $('#every').click(function () {
     if (every_week) {   // 押されている
         every_week = false;
@@ -21,7 +21,7 @@ $('#every').click(function () {
         every_week = true;
     }
 });
-*/
+
 
 /*
  * シフト予約表においては、ヘッダが配列インデックス[0]に当たる。
@@ -101,10 +101,28 @@ function changeCell(Cell) {
                 // 同じ場所
                 if (grids[ p_cell[0]-1 ][ p_cell[1]-1 ] == 0) {
                     // 予約
-                    paint_cell(i, j);
+                    if (every_week) {
+                        for (var k=rowINX; k<myTbl.rows.length; k+=7) {
+                            paint_cell(k, cellINX);
+                        }
+                        for (var k=rowINX-7; k>0; k-=7) {
+                            paint_cell(k, cellINX);
+                        }
+                    } else {
+                        paint_cell(rowINX, cellINX);
+                    }
                 } else {
                     // 取り消し
-                    paint_cell(i, j);
+                    if (every_week) {
+                        for (var k=rowINX; k<myTbl.rows.length; k+=7) {
+                            paint_cell(k, cellINX);
+                        }
+                        for (var k=rowINX-7; k>0; k-=7) {
+                            paint_cell(k, cellINX);
+                        }
+                    } else {
+                        paint_cell(rowINX, cellINX);
+                    }
                 }
             } else {
                 if (p_cell[0] <= rowINX) {
@@ -152,16 +170,16 @@ function changeCell(Cell) {
 }
 
 function paint_cell(x, y) {
-    if (myTbl.rows[i].cells[j].innerHTML.match("#f02")) {
+    if (myTbl.rows[x].cells[y].innerHTML.match("#f02")) {
         // 休業セルは変更しない
-    } else if (grids[i-1][j-1] == 0) {
+    } else if (grids[x-1][y-1] == 0) {
         // 塗り替え対象の今の状態が白色
-        myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + i +''+ j +'"></div>';
-        grids[i-1][j-1] = 1;
-    } else if (grids[i-1][j-1] == 1) {
+        myTbl.rows[x].cells[y].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #0f0;" id="element_' + x +''+ y +'"></div>';
+        grids[x-1][y-1] = 1;
+    } else if (grids[x-1][y-1] == 1) {
         // 塗り替え対象の今の状態が緑色
-        myTbl.rows[i].cells[j].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + i +''+ j +'"></div>';
-        grids[i-1][j-1] = 0;
+        myTbl.rows[x].cells[y].innerHTML = '<div style="width: 50px; height:26px; margin: 0px; border: none; background: #fff;" id="element_' + x +''+ y +'"></div>';
+        grids[x-1][y-1] = 0;
     } else {}
 }
 
