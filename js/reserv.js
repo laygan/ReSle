@@ -99,30 +99,17 @@ function changeCell(Cell) {
             // 指定点おｋ
             if (rowINX==p_cell[0] && cellINX==p_cell[1]) {
                 // 同じ場所
-                if (grids[ p_cell[0]-1 ][ p_cell[1]-1 ] == 0) {
-                    // 予約
-                    if (every_week) {
-                        for (var k=rowINX; k<myTbl.rows.length; k+=7) {
-                            paint_cell(k, cellINX);
-                        }
-                        for (var k=rowINX-7; k>0; k-=7) {
-                            paint_cell(k, cellINX);
-                        }
-                    } else {
-                        paint_cell(rowINX, cellINX);
+                if (every_week) {
+                    // 毎週ボタンTrue
+                    for (var k=rowINX; k<myTbl.rows.length; k+=7) {
+                        paint_cell(k, cellINX);
+                    }
+                    for (var k=rowINX-7; k>0; k-=7) {
+                        paint_cell(k, cellINX);
                     }
                 } else {
-                    // 取り消し
-                    if (every_week) {
-                        for (var k=rowINX; k<myTbl.rows.length; k+=7) {
-                            paint_cell(k, cellINX);
-                        }
-                        for (var k=rowINX-7; k>0; k-=7) {
-                            paint_cell(k, cellINX);
-                        }
-                    } else {
-                        paint_cell(rowINX, cellINX);
-                    }
+                    // 毎週ボタンFalse
+                    paint_cell(rowINX, cellINX);
                 }
             } else {
                 if (p_cell[0] <= rowINX) {
@@ -131,14 +118,36 @@ function changeCell(Cell) {
                         // 基準点が上か同じ行、かつ左か同じ列
                         for (var i=p_cell[0]; i<=rowINX; i++) {
                             for (var j=p_cell[1]; j<=cellINX; j++) {
-                                paint_cell(i, j);
+                                if (every_week) {
+                                    // 毎週ボタンTrue
+                                    for (var k=i; k<myTbl.rows.length; k+=7) {
+                                        paint_cell(k, j);
+                                    }
+                                    for (var k=i-7; k>0; k-=7) {
+                                        paint_cell(k, j);
+                                    }
+                                } else {
+                                    // 毎週ボタンFalse
+                                    paint_cell(i, j);
+                                }
                             }
                         }
                     } else {
                         // 基準点が上か同じ行、かつ右の列
                         for (var i=p_cell[0]; i<=rowINX; i++) {
                             for (var j=p_cell[1]; j>=cellINX; j--) {
-                                paint_cell(i, j);
+                                if (every_week) {
+                                    // 毎週ボタンTrue
+                                    for (var k=i; k<myTbl.rows.length; k+=7) {
+                                        paint_cell(k, j);
+                                    }
+                                    for (var k=i-7; k>0; k-=7) {
+                                        paint_cell(k, j);
+                                    }
+                                } else {
+                                    // 毎週ボタンFalse
+                                    paint_cell(i, j);
+                                }
                             }
                         }
                     }
@@ -146,23 +155,44 @@ function changeCell(Cell) {
                     // 基準点が下の行
                     if (p_cell[1] <= cellINX) {
                         // 基準点が下の行、かつ左か同じ列
+                        // 毎週ボタンFalse
                         for (var i=p_cell[0]; i>=rowINX; i--) {
                             for (var j=p_cell[1]; j<=cellINX; j++) {
-                                paint_cell(i, j);
+                                if (every_week) {
+                                    // 毎週ボタンTrue
+                                    for (var k=i; k<myTbl.rows.length; k+=7) {
+                                        paint_cell(k, j);
+                                    }
+                                    for (var k=i-7; k>0; k-=7) {
+                                        paint_cell(k, j);
+                                    }
+                                } else {
+                                    // 毎週ボタンFalse
+                                    paint_cell(i, j);
+                                }
                             }
                         }
                     } else {
                         // 基準点が下の行、かつ右か同じ列
+                        // 毎週ボタンFalse
                         for (var i=p_cell[0]; i>=rowINX; i--) {
                             for (var j=p_cell[1]; j>=cellINX; j--) {
-                                paint_cell(i, j);
+                                if (every_week) {
+                                    // 毎週ボタンTrue
+                                    for (var k=i; k<myTbl.rows.length; k+=7) {
+                                        paint_cell(k, j);
+                                    }
+                                    for (var k=i-7; k>0; k-=7) {
+                                        paint_cell(k, j);
+                                    }
+                                } else {
+                                    // 毎週ボタンFalse
+                                    paint_cell(i, j);
+                                }
                             }
                         }
                     }
                 }
-                
-                
-                
             }
         }
         primary = true;
