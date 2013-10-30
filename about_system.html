@@ -18,12 +18,12 @@
         fclose($fp);
         
         // バージョン情報取得
-        preg_match("/[Version: ]\d+([.]\d)+/", $buffer[1], $ans);
+        preg_match("/[Version: ](\d+)+([.](\d+))+/", $buffer[1], $ans);
         $version = $ans[0];
         
         // リリースコメントを読み込み
         for ($j=4; $j<$i-1; $j++) {
-            preg_match("/\d+([.]\d)+[:]\s\S+/", $buffer[$j], $ans);
+            preg_match("/(\d+)+([.](\d+))+[:]\s\S+/", $buffer[$j], $ans);
             $comment .= $ans[0]."<br />\n";
         }
     }else{
