@@ -40,11 +40,8 @@
         <title>シフト予約システム｜管理｜月度シフト予約事前設定</title>
     </head>
     <body>
-        <div class="row">
-            <!-- 左余白 -->
-            <div class="col-md-2"></div>
+        <div class="container">
             <!-- メインコンテンツ -->
-            <div class="col-md-8">
                 <h1>月度シフト予約事前設定</h1>
 <?php
     if ( isset($start_d, $stop_d, $began_d, $finish_d) ) {
@@ -103,9 +100,6 @@
                     </div>
                     <button type="submit" class="btn btn-default pull-right"><?php if ($date_form_enabled) { echo "確定"; } else { echo "再設定"; } ?></button>
                 </form>
-            </div>
-            <!-- 右余白 -->
-            <div class="col-md-2">　</div>
         </div>
                 <!-- ここで一旦PHP処理で上記formをdisabledにする
                      そのあとで、PHPにてカレンダー（シフト予約の）を出力し、休業時間を指定 -->
