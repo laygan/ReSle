@@ -33,13 +33,13 @@
         
          // 予約者数の総数をカウント
         $sql = 'SELECT COUNT(DISTINCT(id)) FROM shift WHERE date>="'. $start_d .'";';
-        echo $sql;
+        echo $sql."\n";
         print_r($db->force_query($sql) );
         
          // 未予約者のidと名前を出力
         $sql = 'SELECT out.id, user.lname, user.fname FROM (SELECT DISTINCT(id) FROM shift WHERE date <"'. $start_d .'") out INNER JOIN user ON out.id=user.id;';
-        echo $sql;
-        print_r($db->query($sql) );
+        echo "\n".$sql."\n";
+        print_r($db->force_query($sql) );
     }else{
         fclose($fp);
     }
