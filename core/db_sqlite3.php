@@ -60,7 +60,8 @@ class db_sqlite3 implements db_conector{
     }
     
     function force_query($str) {
-        return $this->dbconn->query($str);
+        $result = $this->dbconn->query($str);
+        return fetchArray(SQLITE3_ASSOC);
     }
     
     function array_query($str) {
