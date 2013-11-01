@@ -29,7 +29,9 @@
         $db = new db_sqlite3("./../db/srs.db");
          // 現在のシステム登録者数をカウント
         $sql = 'SELECT COUNT(id) FROM user;';
-        var_dump($db->force_query($sql));
+        while ($row = $db->force_query($sql) -> fetchArray()) {
+            var_dump($row);
+        }
         
          // 予約者数の総数をカウント
         $sql = 'SELECT COUNT(DISTINCT(id)) FROM shift WHERE date>="'. $start_d .'";';
