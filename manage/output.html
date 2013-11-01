@@ -29,7 +29,8 @@
         $db = new db_sqlite3("./../db/srs.db");
          // 現在のシステム登録者数をカウント
         $sql = 'SELECT COUNT(id) FROM user;';
-        while ($row = $db->force_query($sql) -> fetchArray()) {
+        $result = $db->force_query($sql);
+        while ($row = $result->fetchArray()) {
             var_dump($row);
         }
         
