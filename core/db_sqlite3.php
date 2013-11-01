@@ -14,6 +14,9 @@ interface db_conector
     //SQL文実行
     function query($str);
     
+    //直打ちSQL文実行
+    function force_query($str);
+    
     //SQL文実行後の結果を配列で取得
     function array_query($str);
     
@@ -54,6 +57,10 @@ class db_sqlite3 implements db_conector{
         $result = $this->dbconn->querySingle($safe_str, TRUE);
         
         return $result;
+    }
+    
+    function force_query($str) {
+        return $this->dbconn->querySingle($str);
     }
     
     function array_query($str) {
