@@ -77,10 +77,10 @@
                 <ul>
                     <li>予約完了率：<?php echo $reserver; ?> / <?php echo $register; ?>（<?php echo round( ($reserver/$register*100), 2) ; ?> %）</li>
                     <li>未予約者一覧：</li>
-                    <ul>
+                    <ol>
 <?php
 foreach ($result as $values) {
-    echo "<ol>";
+    echo "<li>";
     foreach ($values as $key => $data) {
         if ($key == "id") {
             echo "ID:".$data."　";
@@ -88,10 +88,10 @@ foreach ($result as $values) {
             echo $data." ";
         }
     }
-    echo "</ol>";
+    echo "</li>";
 }
 ?>
-                    </ul>
+                    </ol>
                 </ul>
                 <form method="post" action="./../core/ctrl.php">
                     <input type="hidden" name="runFlag" value="getcsv" />
