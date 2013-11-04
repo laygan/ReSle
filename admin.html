@@ -1,28 +1,19 @@
 <?php
-    if ( isset($_GET["force"]) ) {
-        if ($_GET["force"] == 1) {
-        
-        } else {
-            echo "管理者権限がありません。";
-            exit(1);
-        }
-    } else {
-        session_start();
-        if (! isset($_SESSION["authed-id"]) ) {
-            echo "ログイン後にもう一度試行してください。";
-            exit(1);
-        }
-        
-        // db interface
-        require_once('./core/db_sqlite3.php');
-        $db = new db_sqlite3("./db/srs.db");
-        
-        $sql = 'SELECT adm FROM user WHERE id='.$_SESSION["authed-id"].';';
-        $result = $db->query($sql);
-        if ($result["adm"] != "true") {
-            echo "管理者権限がありません。";
-            exit(1);
-        }
+    session_start();
+    if (! isset($_SESSION["authed-id"]) ) {
+        echo "ログイン後にもう一度試行してください。";
+        exit(1);
+    }
+    
+    // db interface
+    require_once('./core/db_sqlite3.php');
+    $db = new db_sqlite3("./db/srs.db");
+    
+    $sql = 'SELECT adm FROM user WHERE id='.$_SESSION["authed-id"].';';
+    $result = $db->query($sql);
+    if ($result["adm"] != "true") {
+        echo "管理者権限がありません。";
+        exit(1);
     }
 ?>
 <!DOCTYPE html>
@@ -60,9 +51,9 @@
                 <blockquote>
                     <form method="post" action="./manage/setup.html">
                         <input type="hidden" name="mode" value="userdel" />
-                        <button type="submit" class="btn btn-warning btn-lg">ユーザ削除</button>
+                        <button type="submit" class="btn btn-warning btn-lg">ユーザ情報編集・削除</button>
                     </form>
-                    <small>ユーザ削除を行います。登録は初期画面の「アカウント作成」で行ってください。</small>
+                    <small>ユーザ情報の編集および削除を行います。登録は初期画面の「アカウント作成」で行ってください。</small>
                 </blockquote>
                 <blockquote>
                     <form method="post" action="./manage/setup.html">
