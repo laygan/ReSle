@@ -30,17 +30,22 @@
          // 現在のシステム登録者数をカウント
         $sql = 'SELECT COUNT(id) FROM user;';
         $result = $db->force_query($sql);
-        echo $result[0]["COUNT(id)"];
+        echo "登録者数：".$result[0]["COUNT(id)"];
         
          // 予約者数の総数をカウント
         $sql = 'SELECT COUNT(DISTINCT(id)) FROM shift WHERE date>="'. $start_d .'";';
         $result = $db->force_query($sql);
-        var_dump($result);
+        echo "\n予約者数：".$result[0]["COUNT(DISTINT(id))"];
         
          // 未予約者のidと名前を出力
         $sql = 'SELECT out.id, user.lname, user.fname FROM (SELECT DISTINCT(id) FROM shift WHERE date <"'. $start_d .'") out INNER JOIN user ON out.id=user.id;';
         $result = $db->force_query($sql);
-        var_dump($result);
+        foreach ($result as $values) {
+            foreach ($values as $key => $data) {
+                echo "\n".$key.":".$data;
+            }
+        }
+        
     }else{
         fclose($fp);
     }
