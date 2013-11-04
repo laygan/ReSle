@@ -61,11 +61,7 @@ class db_sqlite3 implements db_conector{
     
     function force_query($str) {
         $result = $this->dbconn->query($str);
-        $ans = array();
-        while ($var = $result->fetchArray(SQLITE3_ASSOC)) {
-            $ans[] = $var;
-        }
-        return $ans;
+        return $this->open_result($result);
     }
     
     function array_query($str) {
@@ -74,7 +70,15 @@ class db_sqlite3 implements db_conector{
         #echo $safe_str;
         $result = $this->dbconn->query($safe_str);
         
-        return $result;
+        return $this->open_result($result);
+    }
+    
+    function open_result($object) {
+        $ary = array();
+        while ($var = $object->fetchArray(SQLITE3_ASSOC)) {
+            $ary[] = $var;
+        }
+        return $ary;
     }
     
     function last_error() {
