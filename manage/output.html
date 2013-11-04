@@ -32,7 +32,7 @@
          // 現在のシステム登録者数をカウント
         $sql = 'SELECT COUNT(id) FROM user;';
         $result = $db->force_query($sql);
-        $register = $result[0]["COUNT(id)"];
+        $register = $result[0]["COUNT(id)"] - 1;
         
          // 予約者数の総数をカウント
         $sql = 'SELECT COUNT(DISTINCT(id)) FROM shift WHERE date>="'. $start_d .'";';
