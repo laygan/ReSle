@@ -10,7 +10,9 @@
         die("getcsv-load_settingエラー：設定情報がありません");
     }
     
-    $buffer = array();
+    $buffer = array();  // ファイル読み込みバッファ
+    $register; $reserver; $non_reserver;
+    
     $i = 0;
     if (flock($fp, LOCK_SH)){
         while (!feof($fp)) {
@@ -30,21 +32,16 @@
          // 現在のシステム登録者数をカウント
         $sql = 'SELECT COUNT(id) FROM user;';
         $result = $db->force_query($sql);
-        echo "登録者数：".$result[0]["COUNT(id)"];
+        $register = $result[0]["COUNT(id)"];
         
          // 予約者数の総数をカウント
         $sql = 'SELECT COUNT(DISTINCT(id)) FROM shift WHERE date>="'. $start_d .'";';
         $result = $db->force_query($sql);
-        echo "\n予約者数：".$result[0]["COUNT(DISTINT(id))"];
+        $reserver = $result[0]["COUNT(DISTINCT(id))"];
         
          // 未予約者のidと名前を出力
         $sql = 'SELECT out.id, user.lname, user.fname FROM (SELECT DISTINCT(id) FROM shift WHERE date <"'. $start_d .'") out INNER JOIN user ON out.id=user.id;';
         $result = $db->force_query($sql);
-        foreach ($result as $values) {
-            foreach ($values as $key => $data) {
-                echo "\n".$key.":".$data;
-            }
-        }
         
     }else{
         fclose($fp);
@@ -78,7 +75,23 @@
                 <h3>現在出力できるシフト予約表は、<?php echo $start_d; ?>から<?php echo $stop_d; ?>です。</h3>
                 <h3>今現在の予約状況</h3>
                 <ul>
-                    <li>予約完了率</li>
+                    <li>予約完了率：<?php echo $reserver; ?> / <?php echo $register; ?>（<?php echo round( ($reserver/$register*100), 2) ; ?> %）</li>
+                    <li>未予約者一覧：</li>
+                    <ul>
+<?php
+foreach ($result as $values) {
+    echo "<ol>";
+    foreach ($values as $key => $data) {
+        if ($key == "id") {
+            echo "ID:".$data."　";
+        } else {
+            echo $data." ";
+        }
+    }
+    echo "</ol>";
+}
+?>
+                    </ul>
                 </ul>
                 <form method="post" action="./../core/ctrl.php">
                     <input type="hidden" name="runFlag" value="getcsv" />
