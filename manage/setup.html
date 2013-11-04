@@ -3,7 +3,7 @@
     require_once('./../core/db_sqlite3.php');
     
     $db = new db_sqlite3("./../db/srs.db");
-    $sql = 'SELECT * FROM user;';
+    $sql = 'SELECT id, uname, lname, fname FROM user;';
     var_dump( $db->array_query($sql) );
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
