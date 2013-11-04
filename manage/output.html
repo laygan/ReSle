@@ -85,17 +85,18 @@
                     <li>未予約者一覧：</li>
                     <ol>
 <?php
-foreach ($result as $values) {
-    echo "<li>";
-    foreach ($values as $key => $data) {
-        if ($key == "id") {
-            echo "ID:".$data."　";
-        } else {
-            echo $data." ";
+    foreach ($result as $values) {
+        echo "<li>";
+        foreach ($values as $key => $data) {
+            if ($key == "id") {
+                echo "ID:".$data."　";
+            } else {
+                echo $data." ";
+            }
         }
+        echo "</li>";
     }
-    echo "</li>";
-}
+    unset($result, $values, $key, $data);
 ?>
                     </ol>
                 </ul>
