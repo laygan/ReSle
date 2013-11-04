@@ -1,4 +1,11 @@
 <?php
+     // db interface
+    require_once('./../core/db_sqlite3.php');
+    
+    $db = new db_sqlite3("./../db/srs.db");
+    $sql = 'SELECT * FROM user;';
+    echo $db->query($sql);
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (! isset($_POST["mode"]) ) {
             echo "エラー：POST値NULL";
@@ -7,7 +14,7 @@
             $mode = $_POST["mode"];
             
             if ($mode==="userdel") {
-                $modestr = "ユーザ削除";
+                $modestr = "ユーザ情報操作";
                 $md = 1;
             } else if ($mode==="init") {
                 $modestr = "システム初期化";
@@ -41,9 +48,10 @@
                 <form method="post" action="./../core/ctrl.php">
                     <div class="form-group">
                         <input type="hidden" name="runFlag" value="rm-user" />
-                        <label for="del-uname">Username</label>
-                        <input type="text" class="form-control" name="del-uname" placeholder="ユーザ名" />
-                        <span class="help-block">削除するユーザのユーザ名を入力してください。</span>
+                        <select class="form-control input-lg" type="text" placeholder="ユーザを選択">
+                            <option></option>
+                        </select>
+                        <span class="help-block">情報操作するユーザを選択してください。</span>
                     </div>
 <?php
     } else if ($md === 2) {
