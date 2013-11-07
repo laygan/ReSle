@@ -44,9 +44,8 @@
         $result = $db->array_query($sql);
 ?>
                 <p><?php print $modestr; ?>を行うユーザ名を指定してください。</p>
-                <form method="post" action="./../core/ctrl.php">
+                <form method="post" action="./edit_user.html">
                     <div class="form-group">
-                        <input type="hidden" name="runFlag" value="rm-user" />
                         <select class="form-control input-lg" type="text" placeholder="ユーザを選択">
                             <option>ユーザを選択</option>
 <?php
