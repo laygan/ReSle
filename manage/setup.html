@@ -42,6 +42,7 @@
         $db = new db_sqlite3("./../db/srs.db");
         $sql = 'SELECT id, uname, lname, fname FROM user;';
         $result = $db->array_query($sql);
+        var_dump($result);
 ?>
                 <p><?php print $modestr; ?>を行うユーザ名を指定してください。</p>
                 <form method="post" action="./edit_user.html">
@@ -52,6 +53,7 @@
         foreach ($result as $values) {
             echo "<option>";
             foreach ($values as $key => $data) {
+            	  
                 echo $data." ";
             }
             echo "</option>";
