@@ -6,6 +6,7 @@
         die("POST値不足");
     }
     
+    
     $db = new db_sqlite3("./../db/srs.db");
-    $sql = 'SELECT id, uname, lname, fname FROM user WHWRE id='.:
+    $sql = 'SELECT id, uname, lname, fname FROM user WHWRE id='.$id.';';
 ?>
