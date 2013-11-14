@@ -8,5 +8,24 @@
     
     
     $db = new db_sqlite3("./../db/srs.db");
-    $sql = 'SELECT id, uname, lname, fname FROM user WHWRE id='.$id.';';
+    $sql = 'SELECT id, uname, lname, fname FROM user WHWRE id='.$_POST["selected_user"].';';
+    $result = $db->query($sql);
+    
+    var_dump($result);
 ?>
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./../css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="./../js/bootstrap.min.js"></script>
+        <title>シフト予約システム｜管理設定｜ユーザ情報操作</title>
+    </head>
+    <body>
+        <div class="container">
+            <!-- メインコンテンツ -->
+            <h1>ユーザ情報編集・削除</h1>
+            
+        </div>
+    </body>
+</html>
