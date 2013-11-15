@@ -8,8 +8,7 @@
     
     
     $db = new db_sqlite3("./../db/srs.db");
-    echo $_POST["selected_user"];
-    $sql = 'SELECT id, uname, lname, fname FROM user WHWRE id='.$_POST["selected_user"].';';
+    $sql = 'SELECT id, uname, lname, fname FROM user WHERE id='.$_POST["selected_user"].';';
     $result = $db->query($sql);
     
     var_dump($result);
