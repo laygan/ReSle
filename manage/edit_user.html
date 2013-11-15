@@ -7,7 +7,7 @@
     }
     
     $db = new db_sqlite3("./../db/srs.db");
-    $sql = 'SELECT id, uname, lname, fname FROM user WHERE id='.$_POST["selected_user"].';';
+    $sql = 'SELECT id, uname, lname, fname, adm FROM user WHERE id='.$_POST["selected_user"].';';
     $result = $db->query($sql);
 ?>
 <!DOCTYPE html>
@@ -35,6 +35,9 @@
             	<div class="form-group">
             		<label for="fnameinput">名前</label>
             		<input type="text" class="form-control" id="fnameinput" placeholer="First name" value="<?php echo $result["fname"]; ?>" />
+            	</div>
+            	<div class="checkbox">
+            		<label><input type="checkbox" name="adm" value="true" <?php if($result["adm"]==="true") echo "checked"; ?> />管理者権限</label>
             	</div>
             </form>
         </div>
