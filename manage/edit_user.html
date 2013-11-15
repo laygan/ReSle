@@ -6,12 +6,9 @@
         die("POST値不足");
     }
     
-    
     $db = new db_sqlite3("./../db/srs.db");
     $sql = 'SELECT id, uname, lname, fname FROM user WHERE id='.$_POST["selected_user"].';';
     $result = $db->query($sql);
-    
-    var_dump($result);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -25,7 +22,21 @@
         <div class="container">
             <!-- メインコンテンツ -->
             <h1>ユーザ情報編集・削除</h1>
-            
+            <h3>内部処理用ユーザ識別ID: <?php echo $result["id"]; ?></h3>
+            <form role="form" method="post" name="e-user" action="./../core/ctrl.php">
+            	<div class="form-group">
+            		<label for="useridinput">ユーザID</label>
+            		<input type="text" class="form-control" id="useridinput" placeholder="User name" value="<?php echo $result["uname"]; ?>" />
+            	</div>
+            	<div class="form-group">
+            		<label for="lnameinput">名字</label>
+            		<input type="text" class="form-control" id="lnameinput" placeholder="Last name" value="<?php echo $result["lname"]; ?>" />
+            	</div>
+            	<div class="form-group">
+            		<label for="fnameinput">名前</label>
+            		<input type="text" class="form-control" id="fnameinput" placeholer="First name" value="<?php echo $result["fname"]; ?>" />
+            	</div>
+            </form>
         </div>
     </body>
 </html>
