@@ -26,10 +26,8 @@
 	            <h4>内部処理用ユーザ識別ID: <?php echo $result["id"]; ?></h4>
 	            <form role="form" method="post" name="e-user" action="./../core/ctrl.php">
 	            	<div class="col-md-6">
-		            	<div class="form-group">
-		            		<label for="useridinput">ユーザID</label>
-		            		<input type="text" class="form-control" id="useridinput" placeholder="User name" value="<?php echo $result["uname"]; ?>" />
-		            	</div>
+		            	<p>ユーザID<br />
+		            	<?php echo $result["uname"]; ?></p>
 		            	<div class="form-group">
 		            		<label for="lnameinput">名字</label>
 		            		<input type="text" class="form-control" id="lnameinput" placeholder="Last name" value="<?php echo $result["lname"]; ?>" />
@@ -43,6 +41,7 @@
 		            	</div>
 		            </div>
 		            <div class="col-md-6">
+		            	<p>ユーザ名及びパスワードを変更することはできません。変更の必要がある場合はユーザを削除してから、改めて新規ユーザを作成する必要があります。</p>
 		            	<div class="checkbox">
 		            		<label><input type="checkbox" name="rm-user" id="rm-user" value="true" />ユーザを削除し、過去のシフト予約情報も消去します。</label>
 		            	</div>
