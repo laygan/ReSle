@@ -249,7 +249,7 @@
         $html .= '<script type="text/javascript">';
         $html .= 'window.addEventListener("load",msg,false);';
         $html .= 'function msg(){';
-        $html .= 'window.alert("'.$msg.'");';
+        $html .= 'window.alert("'.print_r($msg).'");';
         $html .= 'location.href="'.$uri.'";';
         $html .= '}';
         $html .= '</script>';
