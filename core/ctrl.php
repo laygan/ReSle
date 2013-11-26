@@ -197,6 +197,7 @@
                 $sql = 'DELETE FROM user WHERE id='.$_POST["uid"].';';
                 $result = $db->query($sql);
                 $sql = 'DELETE FROM shift WHERE id='.$_POST["uid"].';';
+                echo $sql;
                 $result .= $db->query($sql);
             } else {
                 die("コアエラー：POST値不正");
@@ -216,6 +217,7 @@
                 $sql .= ', adm="false"';
             }
             $sql .= ' WHERE id='.$_POST["uid"].';';
+            echo $sql;
             $result = $db->query($sql);
         }
     }
