@@ -27,7 +27,7 @@
 	            <form role="form" method="post" name="e-user" action="./../core/ctrl.php">
                         <input type="hidden" name="runFlag" value="e-user" />
                         <input type="hidden" name="return-url" value="<?php echo $_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']; ?>" />
-                        <input type="hidden" name="uid" value="<?php echo $result['uname']; ?>" />
+                        <input type="hidden" name="uid" value="<?php echo $result['id']; ?>" />
 	            	<div class="col-md-6">
 		            	<p>ユーザID<br />
 		            	<?php echo $result["uname"]; ?></p>
