@@ -156,6 +156,7 @@
 ?>
         <form method="post" action="./../core/reserv.php" id="set" name="set" onSubmit="return getdata();">
             <input type="hidden" name="type" value="setup" />
+            <input type="hidden" name="return-url" value="<?php echo $_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']; ?>" />
             <input type="hidden" name="res_s" value=<?php echo "\"".$_POST["res_s"]."\""; ?> />
             <input type="hidden" name="res_e" value=<?php echo "\"".$_POST["res_e"]."\""; ?> />
             <input type="hidden" name="rec_s" value=<?php echo "\"".$_POST["rec_s"]."\""; ?> />

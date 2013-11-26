@@ -2,12 +2,16 @@
     if ( isset($_POST["type"]) ) {
         if ($_POST["type"] === "setup") {
             if ( isset($_POST["res_s"], $_POST["res_e"], $_POST["rec_s"], $_POST["rec_e"]) ) {
+                    $uri = "http://".$_POST["return-url"];
                     $buff = print_r($_POST, true);
                     $fp = fopen("./../db/settings.ini", 'w');
                     
                     fwrite($fp, "@ This file was written by PHP program.\n@ Don't Edit.\n\n\n");    // 1-4行目
                     fwrite($fp, $buff);
                     fclose($fp);
+                    
+                    preg_match('/^(.*)(ReSle)/', $uri, $m);
+                    page_return("予約設定が完了しました。", $m[0]."/admin.html");
             } else {
                 die("予約エラー：POST値不足");
             }
@@ -46,7 +50,9 @@
                 $db->query($sql);
                 $start->modify("+1 day");
             }
-            echo "終了";
+            $uri = "http://".$_POST["return-url"];
+            preg_match('/^(.*)(ReSle)/', $uri, $m);
+            page_return("予約が完了しました。", $m[0]."/reserv.html");
         } else {
             die("予約エラー：処理指示が不正");
         }
