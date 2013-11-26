@@ -213,8 +213,9 @@
                     die("コアエラー：POST値不正");
                 }
             } else {
-                $sql .= ' WHERE id='.$_POST["uid"].';';
+                $sql .= ', adm="false"';
             }
+            $sql .= ' WHERE id='.$_POST["uid"].';';
             $result = $db->query($sql);
         }
     }
