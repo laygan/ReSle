@@ -188,6 +188,7 @@
     }
 
     function user_edit() {
+        $uri = "http://".$_POST["return-url"];
         $db = new db_sqlite3("./../db/srs.db");
         
         $uri = "http://".$_POST["return-url"];
@@ -199,6 +200,8 @@
                 $sql = 'DELETE FROM shift WHERE id='.$_POST["uid"].';';
                 echo $sql;
                 $result .= $db->query($sql);
+                
+                $this->page_return("ユーザの削除処理が完了しました。\nError:".$result, $uri);
             } else {
                 die("コアエラー：POST値不正");
             }
@@ -219,6 +222,8 @@
             $sql .= ' WHERE id='.$_POST["uid"].';';
             echo $sql;
             $result = $db->query($sql);
+            
+            $this->page_return("ユーザの更新処理が完了しました。\nError:".$result, $uri);
         }
     }
     
@@ -239,5 +244,21 @@
         print_r( $db->query("CREATE TABLE shift(id integer NOT NULL, date text NOT NULL, times integer NOT NULL);") );
         
         print "<p>Finished all sequence by SYSTEM.<br />If no errors are displayed, you must resume operation from top page.</p>";
+    }
+    
+    function page_return($msg, $uri) {
+        $html = '<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8" /></head>\n';
+        $html .= '<script type="text/javascript">\n';
+        $html .= '//<!--\n';
+        $html .= 'window.addEventListener("load",msg,false);\n';
+        $html .= 'function msg(){\n';
+        $html .= 'window.alert("'.$msg.'");\n';
+        $html .= 'location.href="'.$uri.'";\n';
+        $html .= '}\n';
+        $html .= '//-->\n';
+        $html .= '</script>\n';
+        $html .= '<body></body></html>';
+        
+        print($html);
     }
 ?>
