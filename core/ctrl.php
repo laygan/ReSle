@@ -14,7 +14,7 @@
             $mode = $_POST["runFlag"];
             
             switch ($mode) {
-                case "rm-user" :
+                case "u_edit" :
                     rmuser($_POST["del-uname"]);
                     break;
                 case "sys-init" :
@@ -185,7 +185,7 @@
         
     }
     
-    function rmuser($target) {
+    function u_edit($target) {
         if ( empty($target) ) {
             echo "コアエラー：NULLターゲット";
             exit(1);
