@@ -223,7 +223,7 @@
             $sql .= ' WHERE id='.$_POST["uid"].';';
             $result = $db->query($sql);
             
-            echo http_build_url($uri, array("path" => "/admin.html") );
+            var_dump( parse_url($uri) );
             //page_return("ユーザの更新処理が完了しました。", $uri);
         }
     }
