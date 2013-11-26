@@ -247,13 +247,11 @@
     function page_return($msg, $uri) {
         $html = '<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8" /></head>';
         $html .= '<script type="text/javascript">';
-        $html .= '/*<!--*/';
         $html .= 'window.addEventListener("load",msg,false);';
         $html .= 'function msg(){';
         $html .= 'window.alert("'.$msg.'");';
         $html .= 'location.href="'.$uri.'";';
         $html .= '}';
-        $html .= '/*-->*/';
         $html .= '</script>';
         $html .= '<body></body></html>';
         
