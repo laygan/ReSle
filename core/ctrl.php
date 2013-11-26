@@ -14,11 +14,8 @@
             $mode = $_POST["runFlag"];
             
             switch ($mode) {
-                case "u_edit" :
-                    rmuser($_POST["del-uname"]);
-                    
                 case "e-user" :
-                    user_edit($_POST["del-uname"]);
+                    user_edit();
                     break;
                 
                 case "sys-init" :
@@ -189,18 +186,37 @@
         }
         
     }
-    
-    function u_edit($target) {
-        // target
-    }
 
-    function user_edit($target) {
-        if ( empty($target) ) {
-            echo "コアエラー：NULLターゲット";
-            exit(1);
+    function user_edit() {
+        $db = new db_sqlite3("./../db/srs.db");
+        
+        $uri = "http://".$_POST["return-url"];
+        if ( isset($_POST["rm-user"]) ) {
+            // ユーザ削除
+            if ( $_POST["rm-user"]==="true" ) {
+                $sql = 'DELETE FROM user WHERE id='.$_POST["uid"].';';
+                $result = $db->query($sql);
+                $sql = 'DELETE FROM shift WHERE id='.$_POST["uid"].';';
+                $result .= $db->query($sql);
+            } else {
+                die("コアエラー：POST値不正");
+            }
+        } else {
+            // ユーザ編集
+            $sql = 'UPDATE user SET lname="'.$_POST["lname"].'", fname="'.$_POST["fname"].'"';
+            
+            // 管理者権限付与のチェック
+            if ( isset($_POST["adm"]) ) {
+                if ( $_POST["adm"]==="true" ) {
+                    $sql .= ', adm="true"';
+                } else {
+                    die("コアエラー：POST値不正");
+                }
+            } else {
+                $sql .= ' WHERE id='.$_POST["uid"].';';
+            }
+            $result = $db->query($sql);
         }
-        
-        
     }
     
     function initialize() {
