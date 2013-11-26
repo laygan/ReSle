@@ -16,10 +16,15 @@
             switch ($mode) {
                 case "u_edit" :
                     rmuser($_POST["del-uname"]);
+                    
+                case "e-user" :
+                    user_edit($_POST["del-uname"]);
                     break;
+                
                 case "sys-init" :
                     initialize();
                     break;
+                
                 case "add-user" :
                     add_user();
                     break;
@@ -186,6 +191,10 @@
     }
     
     function u_edit($target) {
+        // target
+    }
+
+    function user_edit($target) {
         if ( empty($target) ) {
             echo "コアエラー：NULLターゲット";
             exit(1);
