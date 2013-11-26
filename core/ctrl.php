@@ -200,7 +200,9 @@
                 $sql = 'DELETE FROM shift WHERE id='.$_POST["uid"].';';
                 $result .= $db->query($sql);
                 
-                page_return("ユーザの削除処理が完了しました。\nError:".$result, $uri);
+                echo http_build_url($uri, array("path" => "/admin.html") );
+                
+                //page_return("ユーザの削除処理が完了しました。", $uri);
             } else {
                 die("コアエラー：POST値不正");
             }
@@ -221,7 +223,8 @@
             $sql .= ' WHERE id='.$_POST["uid"].';';
             $result = $db->query($sql);
             
-            page_return("ユーザの更新処理が完了しました。\nError:".$result, $uri);
+            echo http_build_url($uri, array("path" => "/admin.html") );
+            //page_return("ユーザの更新処理が完了しました。", $uri);
         }
     }
     
