@@ -23,6 +23,8 @@ function append() {
         window.alert("すべての項目を埋めてください。");
     } else if (isZen(uname)) {
         window.alert("Usernameに全角文字を使用することはできません。");
+    } else if (uname.length < 6) {
+        window.alert("Usernameの文字数は６文字以上にしてください。");
     } else {
         if (pass0 == pass1) {
             document.getElementById("passwd0").value="rgt4hyjuk8j7uj65h4tyju54hg3htjyruk6r5j;6hetyrku5j46hertejysku5e7j64";
