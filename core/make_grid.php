@@ -72,9 +72,19 @@
                 // 休業時間のセルを赤く染める作業
                 $out_2 = base_convert($out_10[$i], 10, 2);
                 $length = strlen($out_2);
+                // 生成された２進数列の先頭を０で埋める作業
                 for ($m=$length; $m<21; $m++) {
                     $tmp = "0".(string)$out_2;
                     $out_2 = $tmp;
+                }
+                
+                // 予約時間を可視化する作業
+                $reserv_2 = base_convert($reserv_10[$i], 10, 2);
+                $length = strlen($reserv_2);
+                // 生成された２進数列の先頭を０で埋める作業
+                for ($m=$length; $m<21; $m++) {
+                    $tmp = "0".(string)$reserv_2;
+                    $reserv_2 = $tmp;
                 }
             }
             echo "            <tr>\n";
@@ -86,7 +96,11 @@
             for ($j=0; $j<21; $j++) {
                 if ($reserv) {
                     if ($out_2[$j] === "1") {
+                        // 休業日セルを赤く染める
                         echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #f02;\" id=\"element_".$i.$j."\"></div></td>";
+                    } else if ( $reserv_2[$j] === "1" ) {
+                        // 予約セルを緑色に染める
+                        echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #0f0;\" id=\"element_".$i.$j."\"></div></td>";
                     } else if ( ($j>=1 && $j<=3) || ($j>=9 && $j<=11) || ($j>=16 && $j<=18) ) {
                         echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #ddd;\" id=\"element_".$i.$j."\"></div></td>";
                     } else if ( ($j>=4 && $j<=7) || ($j>=12 && $j<=15)) {
