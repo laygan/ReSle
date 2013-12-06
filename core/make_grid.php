@@ -36,13 +36,13 @@
                     echo "<h3>予約期限：$limite_d</h3>\n";
                     
                     // 休業日を取り出し
-                    for ($i=0; $i<count($data)-13; $i++) {
-                        preg_match("/[0-9]+/", $data[$i+11], $ans);
+                    for ($i=0; $i<count($data)-14; $i++) {
+                        preg_match("/[0-9]+/", $data[$i+12], $ans);
                         if ( intval($ans[0]) !== $i) {
                             die("make_gridエラー：休業条件適合時にミスマッチ");
                             exit(1);
                         }
-                        preg_match("/[0-9]{1,7}$/", $data[$i+11], $ans);
+                        preg_match("/[0-9]{1,7}$/", $data[$i+12], $ans);
                         $out_10[$i] = intval($ans[0]);
                     }
                 }
