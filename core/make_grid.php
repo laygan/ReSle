@@ -16,13 +16,13 @@
                 die("make_gridエラー：設定情報読み出し失敗");
             } else {
                 // パラメータ読み出し
-                preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[7], $ans);
-                $start_d = $ans[0];
                 preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[8], $ans);
-                $stop_d = $ans[0];
+                $start_d = $ans[0];
                 preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[9], $ans);
-                $limits_d = $ans[0];
+                $stop_d = $ans[0];
                 preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[10], $ans);
+                $limits_d = $ans[0];
+                preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[11], $ans);
                 $limite_d = $ans[0];
                 
                 // シフト募集期間内であるかどうかの確認
