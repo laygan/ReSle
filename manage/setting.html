@@ -15,13 +15,13 @@
             flock($fp, LOCK_UN);
             fclose($fp);
             
-            preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[7], $ans);
-            $start_d = $ans[0];
             preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[8], $ans);
-            $stop_d = $ans[0];
+            $start_d = $ans[0];
             preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[9], $ans);
-            $began_d = $ans[0];
+            $stop_d = $ans[0];
             preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[10], $ans);
+            $began_d = $ans[0];
+            preg_match("/\d{4}\W\d{2}\W\d{2}/", $buffer[11], $ans);
             $finish_d = $ans[0];
         }else{
             fclose($fp);
