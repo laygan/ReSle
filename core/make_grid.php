@@ -99,10 +99,10 @@
                     if ($out_2[$j] === "1") {
                         // 休業日セルを赤く染める
                         echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #f02;\" id=\"element_".$i.$j."\"></div></td>";
-                    } else if ( $reserv_2[$j] === "1" ) {
+                    }/* else if ( $reserv_2[$j] === "1" ) {
                         // 予約セルを緑色に染める
                         echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #0f0;\" id=\"element_".$i.$j."\"></div></td>";
-                    } else if ( ($j>=1 && $j<=3) || ($j>=9 && $j<=11) || ($j>=16 && $j<=18) ) {
+                    }*/ else if ( ($j>=1 && $j<=3) || ($j>=9 && $j<=11) || ($j>=16 && $j<=18) ) {
                         echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #ddd;\" id=\"element_".$i.$j."\"></div></td>";
                     } else if ( ($j>=4 && $j<=7) || ($j>=12 && $j<=15)) {
                         echo "                <td><div style=\"width: 50px; height:26px; margin: 0px; border: none; background: #eee;\" id=\"element_".$i.$j."\"></div></td>";
