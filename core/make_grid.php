@@ -77,8 +77,8 @@
                     $tmp = "0".(string)$out_2;
                     $out_2 = $tmp;
                 }
-                
-                // 予約時間を可視化する作業
+                /*
+                // 予約時間を可視化する作業を開発中
                 $reserv_2 = base_convert($reserv_10[$i], 10, 2);
                 $length = strlen($reserv_2);
                 // 生成された２進数列の先頭を０で埋める作業
@@ -86,6 +86,7 @@
                     $tmp = "0".(string)$reserv_2;
                     $reserv_2 = $tmp;
                 }
+                */
             }
             echo "            <tr>\n";
             echo "                <th>";
