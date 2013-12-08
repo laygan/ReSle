@@ -27,9 +27,9 @@
                 die("reserv-reservエラー：設定情報読み出し失敗");
             } else {
                 // パラメータ読み出し
-                preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[7], $ans);
-                $start_d = $ans[0];
                 preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[8], $ans);
+                $start_d = $ans[0];
+                preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[9], $ans);
                 $stop_d = $ans[0];
             }
             $db = new db_sqlite3("./../db/srs.db");
