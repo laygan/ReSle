@@ -19,6 +19,7 @@ window.onload = function() {
 				console.log("Returned NULL");
 			} else {
 				console.log("Got session id!");
+				console.log(json);
 				console.log(data);
 			}
 		}
