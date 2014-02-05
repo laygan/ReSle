@@ -22,6 +22,7 @@ window.onload = function() {
 				console.log(data);
 			}
 		}
+	} );
 }
 
 //送信ボタンに関するJavascript
