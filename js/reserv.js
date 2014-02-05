@@ -18,7 +18,7 @@ window.onload = function() {
 				console.log("Returned NULL");
 			} else {
 				console.log("Got session id!");
-				console.log("Session id = "data);
+				console.log(data);
 			}
 		}
 }
