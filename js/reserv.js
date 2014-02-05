@@ -281,7 +281,7 @@ function get_reserv(id) {
 					// 生成された２進数列の後ろからチェック
 					for (var j=len; j>=0; j--) {
 						if(mark[j] == "1") {
-							paint_cell(i+1, j+1);
+							paint_cell(i+1, j+2);
 						}
                 	}
 					console.log(data[i].date+": "+data[i].times+"→"+mark);
