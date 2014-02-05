@@ -12,7 +12,7 @@ window.onload = function() {
 			'runFlag': 'get-session'
 		},
 		success: function(json) {
-			console.log("Success Request");
+			console.log("Success Request: get Session id");
 			var data = json[0].session_id;
 			if(data == "null") {
 				console.log("Returned NULL");
@@ -269,12 +269,17 @@ function get_reserv(id) {
 			'id':id
 		},
 		success: function(json) {
-			console.log("Success Request");
+			console.log("Success Request: already Reservations");
 			var data = json;
 			if(data == "null") {
 				console.log("Returned NULL");
 			} else {
 				console.log(data);
+				console.log("Convert to binary");
+				for(var i=0; i<data.length; i++) {
+					var mark = data[i].times.toString(2);
+					console.log(data[i].times+"→"+mark);
+				}
 			}
 		}
 	} );
