@@ -60,7 +60,7 @@
     	$db = new db_sqlite3("./../db/srs.db");
     	$sql = 'SELECT date, times FROM shift WHERE id='. $id .';';
     	$result = $db->array_query($sql);
-    	
+    	header('Content-type: application/json');
     	print json_encode($result);
     }
     
