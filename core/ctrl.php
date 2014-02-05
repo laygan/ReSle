@@ -41,6 +41,10 @@
                 case "get-session" :
                 	push_session();
                 	break;
+                
+                case "get-reservation" :
+                	get_reserv($_POST["id"]);
+                	break;
                 	
                 default :
                     echo "コアエラー：不正なPOST値";
@@ -50,6 +54,14 @@
     } else {
         echo "コアエラー：不正なページ遷移";
         exit(1);
+    }
+    
+    function get_reserv(id) {
+    	$db = new db_sqlite3("./../db/srs.db");
+    	$sql = 'SELECT date, times FROM shift WHERE id='. $id .';';
+    	$result = $db->$query($sql);
+    	
+    	print json_encode($result);
     }
     
     function push_session() {

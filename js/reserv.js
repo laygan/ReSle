@@ -4,7 +4,6 @@ window.addEventListener("load",getCELL,false);
 
 var session_id=null;
 window.onload = function() {
-	console.log("AJax");
 	// session idを取得するためのAjax
 	$.ajax( {
 		type: "POST",
@@ -18,9 +17,8 @@ window.onload = function() {
 			if(data == "null") {
 				console.log("Returned NULL");
 			} else {
-				console.log("Got session id!");
-				console.log(json);
-				console.log(data);
+				console.log("Got session id! : "+data);
+				get_reserv(data);
 			}
 		}
 	} );
@@ -261,26 +259,23 @@ function make_hidden( name, value, formname ){
     else{ document.forms[0].appendChild(q); }
 }
 
-/* 2014-02-05 edit 
-function result_getSessionInfo( ) {
-	if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
-        if ( xmlhttp.responseText < 0 ) {
-        	window.alert("予約状況の取得に失敗しました");
-        } else {
-        	// 引き続き予約状況の取得
-        	get_reserv(
+/* 2014-02-05 edit */
+function get_reserv(id) {
+	$.ajax( {
+		type: "POST",
+		url: "./core/ctrl.php",
+		data: {
+			'runFlag':'get-reservation' ,
+			'id':id
+		},
+		success: function(json) {
+			console.log("Success Request");
+			var data = json;
+			if(data == "null") {
+				console.log("Returned NULL");
+			} else {
+				console.log(data);
+			}
+		}
+	} );
 }
-function get_reserv() {
-	
-    
-    if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
-        if ( xmlhttp.responseText < 0 ) {
-            // セッションデータの取得に失敗したときの処理
-        }
-        else {
-            // セッションデータが取得できたときの処理
-        }
-    }
-}
-
-*/
