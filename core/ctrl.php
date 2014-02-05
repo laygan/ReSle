@@ -59,7 +59,7 @@
     	} else {
     		$data = '{ "session_id":'. $_SESSION["authed-id"] .'}';
     	}
-    	print json_decode($data);
+    	print json_encode($data);
     }
     
     function build_csv() {
