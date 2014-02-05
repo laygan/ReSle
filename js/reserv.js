@@ -280,7 +280,7 @@ function get_reserv(id) {
 					var len = mark.length;
 					// 生成された２進数列の先頭を０で埋める作業
 					for (var j=len; j<21; j++) {
-                    	var tmp = "0"+(string)mark;
+                    	var tmp = "0"+mark;
                     	mark = tmp;
                 	}
 					console.log(data[i].date+": "+data[i].times+"→"+mark);
