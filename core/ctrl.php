@@ -55,10 +55,11 @@
     function push_session() {
     	session_start();
     	if (! isset($_SESSION["authed-id"]) ) {
-    		$data = '{ "session_id":"null" }';
+    		$data[] = array( 'session_id' =>"null" );
     	} else {
-    		$data = '{ "session_id":'. $_SESSION["authed-id"] .'}';
+    		$data[] = array( 'session_id' => $_SESSION["authed-id"] );
     	}
+    	header('Content-type: application/json');
     	print json_encode($data);
     }
     
