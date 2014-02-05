@@ -2,6 +2,27 @@
 // 読み込みが終わったら、getCELL()を実行する
 window.addEventListener("load",getCELL,false);
 
+var session_id=null;
+window.onload = function() {
+	// session idを取得するためのAjax
+	$.ajax( {
+		type: "POST",
+		url: "./../core/ctrl.php",
+		data: {
+			'runFlag': 'get-session'
+		},
+		success: function(json) {
+			console.log("Success Request");
+			var data = json[0].session_id;
+			if(data == "null") {
+				console.log("Returned NULL");
+			} else {
+				console.log("Got session id!");
+				console.log("Session id = "data);
+			}
+		}
+}
+
 //送信ボタンに関するJavascript
 $('#btn-state').click(function () {
     var btn = $(this);
@@ -235,4 +256,26 @@ function make_hidden( name, value, formname ){
     q.value = value;
     if (formname){ document.forms[formname].appendChild(q); }
     else{ document.forms[0].appendChild(q); }
+}
+
+/* 2014-02-05 edit */
+function result_getSessionInfo( ) {
+	if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+        if ( xmlhttp.responseText < 0 ) {
+        	window.alert("予約状況の取得に失敗しました");
+        } else {
+        	// 引き続き予約状況の取得
+        	get_reserv(
+}
+function get_reserv() {
+	
+    
+    if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+        if ( xmlhttp.responseText < 0 ) {
+            // セッションデータの取得に失敗したときの処理
+        }
+        else {
+            // セッションデータが取得できたときの処理
+        }
+    }
 }

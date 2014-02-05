@@ -37,6 +37,11 @@
                 case "getcsv" :
                     build_csv();
                     break;
+                
+                case "get-session" :
+                	push_session();
+                	break;
+                	
                 default :
                     echo "コアエラー：不正なPOST値";
                     exit(1);
@@ -45,6 +50,16 @@
     } else {
         echo "コアエラー：不正なページ遷移";
         exit(1);
+    }
+    
+    function push_session() {
+    	session_start();
+    	if (! isset($_SESSION["authed-id"]) ) {
+    		$data = '{ "session_id":"null" }';
+    	} else {
+    		$data = '{ "session_id":'. $_SESSION["authed-id"] .'}';
+    	}
+    	print json_decode($data);
     }
     
     function build_csv() {
