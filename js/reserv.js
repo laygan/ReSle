@@ -274,10 +274,15 @@ function get_reserv(id) {
 			if(data == "null") {
 				console.log("Returned NULL");
 			} else {
-				console.log(data);
-				console.log("Convert to binary");
+				console.log(data);				
 				for(var i=0; i<data.length; i++) {
 					var mark = data[i].times.toString(2);
+					var len = mark.length;
+					// 生成された２進数列の先頭を０で埋める作業
+					for (var j=len; j<21; j++) {
+                    	var tmp = "0"+(string)mark;
+                    	mark = tmp;
+                	}
 					console.log(data[i].date+": "+data[i].times+"→"+mark);
 				}
 			}
