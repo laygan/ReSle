@@ -8,7 +8,7 @@ window.onload = function() {
 	// session idを取得するためのAjax
 	$.ajax( {
 		type: "POST",
-		url: "./../core/ctrl.php",
+		url: "/core/ctrl.php",
 		data: {
 			'runFlag': 'get-session'
 		},
