@@ -260,7 +260,7 @@ function make_hidden( name, value, formname ){
     else{ document.forms[0].appendChild(q); }
 }
 
-/* 2014-02-05 edit */
+/* 2014-02-05 edit 
 function result_getSessionInfo( ) {
 	if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
         if ( xmlhttp.responseText < 0 ) {
@@ -281,3 +281,5 @@ function get_reserv() {
         }
     }
 }
+
+*/
