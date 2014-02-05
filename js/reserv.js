@@ -4,6 +4,7 @@ window.addEventListener("load",getCELL,false);
 
 var session_id=null;
 window.onload = function() {
+	console.log("AJax");
 	// session idを取得するためのAjax
 	$.ajax( {
 		type: "POST",
