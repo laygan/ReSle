@@ -278,7 +278,7 @@ function get_reserv(id) {
 				console.log("Convert to binary");
 				for(var i=0; i<data.length; i++) {
 					var mark = data[i].times.toString(2);
-					console.log(data[i].times+"→"+mark);
+					console.log(data[i].day+": "+data[i].times+"→"+mark);
 				}
 			}
 		}
