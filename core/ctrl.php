@@ -56,7 +56,7 @@
         exit(1);
     }
     
-    function get_reserv(id) {
+    function get_reserv($id) {
     	$db = new db_sqlite3("./../db/srs.db");
     	$sql = 'SELECT date, times FROM shift WHERE id='. $id .';';
     	$result = $db->$query($sql);
