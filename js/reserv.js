@@ -279,9 +279,9 @@ function get_reserv(id) {
 					var mark = data[i].times.toString(2);
 					var len = mark.length;
 					// 生成された２進数列の後ろからチェック
-					for (var j=len; j>0; j--) {
+					for (var j=len; j>=0; j--) {
 						if(mark[j] == "1") {
-							paint_cell(i+2, j+2);
+							paint_cell(i+1, j+1);
 						}
                 	}
 					console.log(data[i].date+": "+data[i].times+"→"+mark);
