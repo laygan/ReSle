@@ -271,6 +271,7 @@ function get_reserv(id) {
 		success: function(json) {
 			console.log("Success Request: already Reservations");
 			var data = json;
+			console.log(data);
 			if(data == "null") {
 				console.log("Returned NULL");
 			} else {
