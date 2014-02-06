@@ -68,7 +68,7 @@
             $start = new DateTime($ans[0]);
             
     		$db = new db_sqlite3("./../db/srs.db");
-    		$sql = 'SELECT date, times FROM shift WHERE id='. $id .' AND date>='. $start->format("Y-m-d") .';';
+    		$sql = 'SELECT date, times FROM shift WHERE id='. $id .' AND date>="'. $start->format("Y-m-d") .'";';
     		$result = $db->force_query($sql);
     	}
     	header('Content-type: application/json');
