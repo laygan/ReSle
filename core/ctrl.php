@@ -60,10 +60,11 @@
     	$result = null;
     	$data = load_setting();
     	
-    	if($data === false) {
+    	if(! $data) {
     		$result = array( "error" => "設定情報が読み込めませんでした。" );
     	} else {
     		preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[8], $ans);
+    		date_default_timezone_set("Asia/Tokyo");
             $start = new DateTime($ans[0]);
             
     		$db = new db_sqlite3("./../db/srs.db");
