@@ -57,11 +57,46 @@
     }
     
     function get_reserv($id) {
-    	$db = new db_sqlite3("./../db/srs.db");
-    	$sql = 'SELECT date, times FROM shift WHERE id='. $id .';';
-    	$result = $db->array_query($sql);
+    	$result = null;
+    	$data = load_setting();
+    	
+    	if($data === false) {
+    		$result = array( "error" => "設定情報が読み込めませんでした。" );
+    	} else {
+    		preg_match("/\d{4}\W\d{2}\W\d{2}/", $data[8], $ans);
+            $start = new DateTime($ans[0]);
+            
+    		$db = new db_sqlite3("./../db/srs.db");
+    		$sql = 'SELECT date, times FROM shift WHERE id='. $id .' AND date>='. $start->format("Y-m-d") .';';
+    		$result = $db->array_query($sql);
+    	}
     	header('Content-type: application/json');
     	print json_encode($result);
+    }
+    
+    function load_setting() {
+        $fp = fopen("./../db/settings.ini", 'r');
+        if ($fp === false) {
+            die("reserv-load_settingエラー：設定情報がありません");
+            return false;
+        }
+        
+        $buffer = array();
+        $i = 0;
+        if (flock($fp, LOCK_SH)){
+            while (!feof($fp)) {
+                $buffer[$i] = fgets($fp);
+                $i++;
+            }
+            flock($fp, LOCK_UN);
+            fclose($fp);
+            return $buffer;
+        }else{
+            fclose($fp);
+            die('make_grid：ファイルロックに失敗しました');
+            return false;
+        }
+        return false;
     }
     
     function push_session() {

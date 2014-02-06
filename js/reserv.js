@@ -3,7 +3,7 @@
 window.addEventListener("load",getCELL,false);
 
 var session_id=null;
-window.onload = function() {
+window.onload = function () {
 	// session idを取得するためのAjax
 	$.ajax( {
 		type: "POST",
@@ -11,7 +11,7 @@ window.onload = function() {
 		data: {
 			'runFlag': 'get-session'
 		},
-		success: function(json) {
+		success: function (json) {
 			console.log("Success Request: get Session id");
 			var data = json[0].session_id;
 			if(data == "null") {
@@ -274,7 +274,7 @@ function get_reserv(id) {
 			if(data == "null") {
 				console.log("Returned NULL");
 			} else {
-				console.log(data);				
+				console.log("Drawing already Reservations...");				
 				for(var i=0; i<data.length; i++) {
 					var mark = data[i].times.toString(2);
 					var len = mark.length;
@@ -284,8 +284,8 @@ function get_reserv(id) {
 							paint_cell(i+1, j+2);
 						}
                 	}
-					console.log(data[i].date+": "+data[i].times+"→"+mark);
 				}
+				console.log("...Done.");
 			}
 		}
 	} );
