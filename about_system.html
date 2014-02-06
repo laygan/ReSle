@@ -1,4 +1,4 @@
-<?php
+ <?php
     $version = "取得失敗";
     $comment = "";
     
@@ -24,7 +24,7 @@
         // リリースコメントを読み込み
         for ($j=4; $j<$i-1; $j++) {
             preg_match("/(\d+)+([.](\d+))+[:]\s\S+/", $buffer[$j], $ans);
-            $comment .= $ans[0]."<br />\n";
+            $comment .= $ans[0]."\n";
         }
     }else{
         fclose($fp);
@@ -115,9 +115,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h4>リリース毎変更情報</h4></div>
                 <div class="panel-body">
-                    <textarea class="form-control" rows="10">
-                        <?php echo $comment; ?>
-                    </textarea>
+                    <textarea class="form-control" rows="10"><?php echo $comment; ?></textarea>
                 </div>
             </div>
         </div>
