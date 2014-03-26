@@ -50,6 +50,7 @@
 				},
 				success: function (json) {
 					console.log("Success Request: get New Versions");
+					console.log(json);
 					var data = json[0].error;
 					if(data == null) {
 						console.log(json);
