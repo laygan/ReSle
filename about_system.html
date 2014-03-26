@@ -49,7 +49,7 @@
 					'c-ver': '<?php echo $version; ?>'
 				},
 				dataType: "jsonp",
-				
+				jsonpCallback: "callback",
 				success: function (json) {
 					console.log("Success Request: get New Versions info");
 					
