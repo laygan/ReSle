@@ -282,6 +282,7 @@ function get_reserv(id) {
 					// 生成された２進数列の後ろからチェック
 					for (var j=len; j>=0; j--) {
 						if(mark[j] == "1") {
+							console.log("Painting: "+i+" "+j);
 							paint_cell(i+1, j+2);
 						}
                 	}
