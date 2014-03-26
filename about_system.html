@@ -29,7 +29,6 @@
     }else{
         fclose($fp);
     }
-    
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +36,45 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="./js/jquery.min.js"></script>
         <title>シフト予約システム｜このシステムについて</title>
     </head>
     <body>
+    	<script type="text/javascript">
+    	//<!--
+    		$.ajax( {
+				type: "POST",
+				url: "http://www.tatsuya-k.net/SVM/ReSle",
+				data: {
+					'c-ver': '<?php echo $version; ?>'
+				},
+				success: function (json) {
+					console.log("Success Request: get New Versions info");
+					
+					var data = json.error;
+					if(data == null) {
+						switch(json.status) {
+							case -1:
+								$("#dev_stat").text("開発中");
+							break;
+							case 0:
+								$("#dev_stat").text("開発およびサポートが終了しています");
+							break;
+							case 1:
+								$("#dev_stat").text("開発が終了していますが、バグフィックスは継続中です。");
+							break;
+							defalut:
+								$("#dev_stat").text("不明な状態");
+						}
+						$("#newest_ver").text(json.newest);
+						$("#message").text(json.message);
+					} else {
+						$("#errors").text(json.error);
+					}
+				}
+			} );
+    	//-->
+    	</script>
         <div class="container">
             <div class="page-header">
                 <h1>シフト予約システム on cloud　<small>このシステムについて</small></h1>
@@ -67,10 +102,23 @@
                 </div>
                 <div class="col-md-6">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><h4>Bitbucket(Global Private Repositry)</h4></div>
+                        <div class="panel-heading"><h4>最新開発情報</h4></div>
                         <div class="panel-body">
-                            <p>最新のバージョンなどの確認はこちらから行えます。</p>
-                            <a href="https://bitbucket.org/laygan/resle/src" target="_blank"><button class="btn btn-lg btn-info">Bitbucketへ移動</button></a>
+                        	<table class="table">
+                        		<tr>
+                        			<td>開発状況</td>
+                        			<td id="dev_stat">取得中...</td>
+                        		</tr>
+                        		<tr>
+                        			<td>利用可能な最新バージョン</td>
+                        			<td id="newest_ver">取得中...</td>
+                        		</tr>
+                        		<tr>
+                        			<td>メッセージ</td>
+                        			<td id="message">取得中...</td>
+                        		</tr>
+                        	</table>
+                        	<p id="errors"></p>
                         </div>
                     </div>
                 </div>
