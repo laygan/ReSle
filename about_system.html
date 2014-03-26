@@ -29,7 +29,6 @@
     }else{
         fclose($fp);
     }
-    
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +36,30 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="./js/jquery.min.js"></script>
         <title>シフト予約システム｜このシステムについて</title>
     </head>
     <body>
+    	<script type="text/javascript">
+    	//<!--
+    		$.ajax( {
+				type: "POST",
+				url: "http://www.tatsuya-k.net/SVM/ReSle",
+				data: {
+					'c-ver': '<?php echo $version; ?>'
+				},
+				success: function (json) {
+					console.log("Success Request: get New Versions");
+					var data = json[0].error;
+					if(data == null) {
+						console.log(json);
+					} else {
+						console.log(json);
+					}
+				}
+			} );
+    	//-->
+    	</script>
         <div class="container">
             <div class="page-header">
                 <h1>シフト予約システム on cloud　<small>このシステムについて</small></h1>
