@@ -49,13 +49,27 @@
 					'c-ver': '<?php echo $version; ?>'
 				},
 				success: function (json) {
-					console.log("Success Request: get New Versions");
-					console.log(json);
+					console.log("Success Request: get New Versions info");
+					
 					var data = json.error;
 					if(data == null) {
-						console.log(json);
+						switch(json.status) {
+							case -1:
+								$("#dev_stat").text("開発中");
+							break;
+							case 0:
+								$("#dev_stat").text("開発およびサポートが終了しています");
+							break;
+							case 1:
+								$("#dev_stat").text("開発が終了していますが、バグフィックスは継続中です。");
+							break;
+							defalut:
+								$("#dev_stat").text("不明な状態");
+						}
+						$("#newest_ver").text(json.newest);
+						$("#message").text(json.message);
 					} else {
-						console.log(json);
+						$("#errors").text(json.error);
 					}
 				}
 			} );
@@ -88,10 +102,23 @@
                 </div>
                 <div class="col-md-6">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><h4>Bitbucket(Global Private Repositry)</h4></div>
+                        <div class="panel-heading"><h4>最新開発情報</h4></div>
                         <div class="panel-body">
-                            <p>最新のバージョンなどの確認はこちらから行えます。</p>
-                            <a href="https://bitbucket.org/laygan/resle/src" target="_blank"><button class="btn btn-lg btn-info">Bitbucketへ移動</button></a>
+                        	<table class="table">
+                        		<tr>
+                        			<td>開発状況</td>
+                        			<td id="dev_stat">取得中...</td>
+                        		</tr>
+                        		<tr>
+                        			<td>利用可能な最新バージョン</td>
+                        			<td id="newest_ver">取得中...</td>
+                        		</tr>
+                        		<tr>
+                        			<td>メッセージ</td>
+                        			<td id="message">取得中...</td>
+                        		</tr>
+                        	</table>
+                        	<p id="errors"></p>
                         </div>
                     </div>
                 </div>
