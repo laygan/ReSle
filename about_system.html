@@ -43,13 +43,13 @@
     	<script type="text/javascript">
     	//<!--
     		$.ajax( {
-				type: "POST",
-				url: "http://www.tatsuya-k.net/SVM/ReSle?callback=?",
+				type: "GET",
+				url: "http://www.tatsuya-k.net/SVM/ReSle",
 				data: {
 					'c-ver': '<?php echo $version; ?>'
 				},
 				dataType: "jsonp",
-				jsonp: "callback",
+				jsonpCallback: "callback",
 				success: function (json) {
 					console.log("Success Request: get New Versions info");
 					
