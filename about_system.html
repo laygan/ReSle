@@ -44,10 +44,12 @@
     	//<!--
     		$.ajax( {
 				type: "POST",
-				url: "http://www.tatsuya-k.net/SVM/ReSle",
+				url: "http://www.tatsuya-k.net/SVM/ReSle?callback=?",
 				data: {
 					'c-ver': '<?php echo $version; ?>'
 				},
+				dataType: "jsonp",
+				jsonp: "callback",
 				success: function (json) {
 					console.log("Success Request: get New Versions info");
 					
