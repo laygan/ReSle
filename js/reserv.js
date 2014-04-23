@@ -280,7 +280,7 @@ function get_reserv(id) {
 					var mark = data[i].times.toString(2);
 					
 					// 生成された２進数列の後ろからチェック
-					for (var j=21; j>=mark.length; j--) {
+					for (var j=21; j<=mark.length; j--) {
 						if(mark[j] == "1") {
 							console.log("Painting: "+i+" "+j);
 							paint_cell(i+1, j+2);
