@@ -278,9 +278,9 @@ function get_reserv(id) {
 				console.log("Drawing already Reservations...");				
 				for(var i=0; i<data.length; i++) {
 					var mark = data[i].times.toString(2);
-					var len = mark.length;
+					
 					// 生成された２進数列の後ろからチェック
-					for (var j=len; j>=0; j--) {
+					for (var j=21; j<=mark.length; j--) {
 						if(mark[j] == "1") {
 							console.log("Painting: "+i+" "+j);
 							paint_cell(i+1, j+2);
