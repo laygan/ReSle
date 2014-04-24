@@ -282,11 +282,11 @@ function get_reserv(id) {
 						// 先頭ゼロ埋め
 						mark = "0"+mark;
 					}
-					console.log(mark);
+					// console.log(mark);
 					// 生成された２進数列チェック
 					for (var j=0; j<=21; j++) {
 						if(mark[j] == "1") {
-							console.log("Painting: "+(i+1)+" "+(j+1));
+							// console.log("Painting: "+(i+1)+" "+(j+1));
 							paint_cell(i+1, j+1);
 						}
                 	}
