@@ -282,6 +282,7 @@ function get_reserv(id) {
 						// 先頭ゼロ埋め
 						mark = "0"+mark;
 					}
+					console.log(mark);
 					// 生成された２進数列の後ろからチェック
 					for (var j=0; j<=21; j++) {
 						if(mark[j] == "1") {
