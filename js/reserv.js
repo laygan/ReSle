@@ -283,7 +283,7 @@ function get_reserv(id) {
 					for (var j=0; j<=mark.length; j++) {
 						if(mark[j] == "1") {
 							console.log("Painting: "+(i+1)+" "+(21-j));
-							paint_cell(i+1, 21-j+2);
+							paint_cell(i+1, 21-j);
 						}
                 	}
 				}
