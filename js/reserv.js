@@ -278,7 +278,7 @@ function get_reserv(id) {
 				console.log("Drawing already Reservations...");				
 				for(var i=0; i<data.length; i++) {
 					var mark = data[i].times.toString(2);
-					for (var a=mark.length; a<=21; a++) {
+					for (var a=mark.length; a<21; a++) {
 						// 先頭ゼロ埋め
 						mark = "0"+mark;
 					}
