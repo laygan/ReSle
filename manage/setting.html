@@ -70,7 +70,7 @@
                 </div>
                 <!-- 予約設定 -->
                 <form method="post" action="">
-                    <h4>１．シフト予約として、募集するはじめ・おわりの日付を指定してください。</h4>
+                    <h4>１．シフト予約カレンダーの出力範囲（シフト予約対象期間）を指定してください．</h4>
                     <div class="row">
                         <label for="reserv">対象予約期間</label>
                         <div class="form-group">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                    <h4>２．シフト予約を募集する期間を設定してください。</h4>
+                    <h4>２．シフト予約カレンダーを表示する期間（予約募集期間）を指定してください．</h4>
                     <div class="row">
                         <label for="reserv">予約募集期間</label>
                         <div class="form-group">
@@ -148,7 +148,7 @@
             }
 ?>
         <blockquote>
-            <button type="button" class="btn btn-warning btn-lg" data-toggle="button">毎　週</button>
+            <button type="button" id="every" class="btn btn-warning btn-lg" data-toggle="button">毎　週</button>
             <small>毎週同じ時間帯に設定する場合はこちらのボタンを押してください。それぞれの週に個別で指定したいときはもう一度押してください。</small>
         </blockquote>
 <?php
