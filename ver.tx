@@ -2,7 +2,7 @@
 Version: 1.0.8
 
 Release Comment:
-1.0.8: PHP Session Start時に"Cannot send session cache limiter"が発生する問題を修正
+1.0.8: PHP_Session_Start時に"Cannot_send_session_cache_limiter"が発生する問題を修正
 1.0.7: 予約事前設定の日本語表記を変更
 1.0.6: 設定済み予約状況の反映に関するバグを修正
 1.0.5: 最新バージョン情報取得機能を追加
